@@ -1,5 +1,6 @@
 # onervn
-Run a rvn node, you will have an asset faucet, a search engine, a qr generater and more things...
+
+Run a rvn node, you will have an asset faucet, a search engine, a QR code generator and more things...kawww
 
 1.Run a rvn node.
 
