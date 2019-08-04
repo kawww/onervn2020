@@ -196,7 +196,7 @@ foreach($age as $x=>$x_value)
 					$x_value="<font color=ff0000>H</font><font color=ff1500>O</font><font color=ff2a00>D</font><font color=ff4000>L</font><font color=ff5500>L</font><font color=ff6a00>L</font><font color=ff7f00>L</font><font color=ff9400>L</font><font color=ffaa00>L</font><font color=ffbf00>L</font><font color=ffd400>L</font><font color=ffea00>L</font><font color=ffff00>L</font><font color=ccff00>L</font><font color=99ff00>L</font><font color=66ff00>L</font><font color=33ff00>L</font><font color=00ff00>L</font><font color=00ff2b>L</font><font color=00ff55>L</font><font color=00ff80>L</font><font color=00ffaa>L</font><font color=00ffd5>L</font><font color=00ffff>L</font><font color=00d5ff>L</font><font color=00aaff>L</font><font color=0080ff>L</font><font color=0055ff>L</font><font color=002bff>L</font><font color=0000ff>L</font>";
 					//http://patorjk.com/text-color-fader/
 					}
-	
+				//gotoipfs is an auto ipfs gateway, you can check these gateway on https://ipfs.github.io/public-gateway-checker/
 				$x_value="&nbsp;&nbsp;<a href=https://gotoipfs.com/#path=".$info['ipfs_hash']." target=_blank style=\"color:blue;text-decoration:none;\">".$x_value."</a>&nbsp;&nbsp;";
 
 				$m_value=$x_value;
