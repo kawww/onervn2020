@@ -1,0 +1,7 @@
+﻿<h4>
+&nbsp;&nbsp;<a href="/qr" style="color: #000000;text-decoration:none;"><b>asset qr</b></a>&nbsp;|&nbsp;
+
+<a href="/" style="color: #000000;text-decoration:none;"><b>search</b></a>&nbsp;|&nbsp;
+
+<a href="/" style="color: #000000;text-decoration:none;">onervn</a>
+</h4>
