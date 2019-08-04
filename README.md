@@ -12,14 +12,22 @@ cd /root/.raven
 raven.conf
 
 rpcuser=yourusername
+
 rpcpassword=yourpassword
+
 rpcport=8765
 
+
 server=1
+
 assetindex=1
+
 addressindex=1
+
 rpcallowip=127.0.0.1
+
 whitelist=127.0.0.1
+
 
 3.Install a webpanel like virtualmin.
 
