@@ -1,8 +1,8 @@
 <?php
 
 function getLine($file, $line, $length = 40960){
-    $returnTxt = null; // 初始化返回
-    $i = 1; // 行数
+    $returnTxt = null; // 
+    $i = 1; // 
  
     $handle = @fopen($file, "r");
     if ($handle) {
