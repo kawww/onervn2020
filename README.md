@@ -45,7 +45,7 @@ webmin->system->Scheduled Cron Jobs
 
 7.have fun!
 
-You can use every command to operate ravend with this php.
+You can use every command (raven-cli help) to operate ravend with this php.
 
 == Addressindex ==
 getaddressbalance
@@ -59,12 +59,12 @@ getassetdata "asset_name"
 getcacheinfo 
 issue "asset_name" qty "( to_address )" "( change_address )" ( units ) ( reissuable ) ( has_ipfs ) "( ipfs_hash )"
 issueunique "root_name" [asset_tags] ( [ipfs_hashes] ) "( to_address )" "( change_address )"
-listaddressesbyasset "asset_name" (onlytotal) (count) (start)
-listassetbalancesbyaddress "address" (onlytotal) (count) (start)
 listassets "( asset )" ( verbose ) ( count ) ( start )
-listmyassets "( asset )" ( verbose ) ( count ) ( start )
+listmyassets "( asset )" ( verbose ) ( count ) ( start ) (confs) 
 reissue "asset_name" qty "to_address" "change_address" ( reissuable ) ( new_unit) "( new_ipfs )" 
-transfer "asset_name" qty "to_address"
+transfer "asset_name" qty "to_address" "message" expire_time "change_address"
+transferfromaddress "asset_name" "from_address" qty "to_address" "message" expire_time
+transferfromaddresses "asset_name" ["from_addresses"] qty "to_address" "message" expire_time
 
 == Blockchain ==
 getbestblockhash
@@ -106,6 +106,14 @@ generatetoaddress nblocks address (maxtries)
 getgenerate
 setgenerate generate ( genproclimit )
 
+== Messages ==
+clearmessages 
+sendmessage "channel_name" "ipfs_hash" (expire_time)
+subscribetochannel 
+unsubscribefromchannel 
+viewallmessagechannels 
+viewallmessages 
+
 == Mining ==
 getblocktemplate ( TemplateRequest )
 getmininginfo
@@ -136,6 +144,26 @@ fundrawtransaction "hexstring" ( options )
 getrawtransaction "txid" ( verbose )
 sendrawtransaction "hexstring" ( allowhighfees )
 signrawtransaction "hexstring" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] ["privatekey1",...] sighashtype )
+
+== Restricted assets ==
+addtagtoaddress tag_name to_address (change_address)
+checkaddressrestriction address restricted_name
+checkaddresstag address tag_name
+checkglobalrestriction restricted_name
+freezeaddress asset_name address (change_address)
+freezerestrictedasset asset_name (change_address)
+getverifierstring restricted_name
+issuerestrictedasset "asset_name" qty "verifier" "to_address" "( change_address )" (units) ( reissuable ) ( has_ipfs ) "( ipfs_hash )"
+isvalidverifierstring verifier_string
+listaddressesfortag tag_name
+listaddressrestrictions address
+listglobalrestrictions
+listtagsforaddress address
+reissuerestrictedasset "asset_name" qty to_address ( change_verifier ) ( "new_verifier" ) "( to_address )" "( change_address )" ( new_unit ) ( reissuable ) "( ipfs_hash )"
+removetagfromaddress tag_name to_address (change_address)
+transferqualifier "qualifier_name" qty "to_address" ("change_address") ("message") (expire_time) 
+unfreezeaddress asset_name address (change_address)
+unfreezerestrictedasset asset_name (change_address)
 
 == Util ==
 createmultisig nrequired ["key",...]
