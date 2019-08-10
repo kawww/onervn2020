@@ -62,6 +62,8 @@ webmin->system->Scheduled Cron Jobs
 
 5.Change rpc user, password and port in rpc.php.
 
+replace RY9a71GJSQemujR2giyCugW5N8bhCFAvJo to your address in rasdaq/index.php.
+
 6.Upload these php and html to public_html.
 
 7.have fun!
