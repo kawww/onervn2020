@@ -2,6 +2,21 @@
 
 Run a rvn node, you will have an asset faucet, a search engine, a QR code generator and more things...kawww
 
+About Rasdaq:
+
+Rasdaq is the world first p2p rvn asset shop open source php program. 
+Rasdaq 1.0 is for testing, local network.
+Don't send much rvn and never store any rvn in rasdaq. These rvn/asset maybe lost.
+Raven is smart, no one can find out where raven go, Kawwww
+
+
+How to run:
+
+a.rvn client
+b.php server
+
+Step:
+
 1.Run a rvn node.
 
 https://github.com/RavenProject/Ravencoin/releases
