@@ -60,7 +60,7 @@ if(!$_REQUEST["address"])
 	<form action=\"/qr/\" method=\"post\">
 	<h2>Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
-	</form><br><h4><a href=\"http://onervn.com/qr?address=RApjEshiuEBhJ5fvX18XVrS3K5712WzDUX\" >RApjEshiuEBhJ5fvX18XVrS3K5712WzDUX</a></h4>";
+	</form><br><h4><a href=\"http://onervn.com/qr?address=RTyyjWdBWb8JZx1dKeXRHXsPcPBSz82WhJ\" >RTyyjWdBWb8JZx1dKeXRHXsPcPBSz82WhJ</a></h4>";
 
 	include("../foot.txt");
 	echo "</center>";
@@ -84,7 +84,7 @@ else
 
 	//check address
 
-	$lena=strlen("RApjEshiuEBhJ5fvX18XVrS3K5712WzDUX");
+	$lena=strlen("RTyyjWdBWb8JZx1dKeXRHXsPcPBSz82WhJ");
 	$lenb=strlen($address);
 
 	if($lena<>$lenb)
