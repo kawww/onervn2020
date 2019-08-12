@@ -430,7 +430,7 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 					
 					}
 
-				}else { echo " <font color=red>out of stock or balance</font>";}
+				}else { echo "&nbsp;&nbsp;<font color=red>out of stock or balance</font>";}
 			}
 		}
 

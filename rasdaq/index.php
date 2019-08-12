@@ -79,7 +79,7 @@ if(!$add & !$_SESSION['raddress'])
 	<form action=\"/rasdaq/\" method=\"post\">
 	<h2>Your Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
-	</form><br>";
+	</form><br><h3><a href=/vip>Get Member Vip Discount</a></h3>";
 
 	include("../foot.txt");
 	echo "</center>";
@@ -185,9 +185,8 @@ else
 	if($refundre<>"" & $_SESSION['refund']=1)
 		{
 		$shopbalance=substr($shopbalance,0,5)." (pending)";}
-		elseif($_SESSION['sendnum']=1)
-		{
-		$shopbalance=substr($shopbalance,0,5)." (pending)";}
+		//elseif($_SESSION['sendnum']=1)
+		//{$shopbalance=substr($shopbalance,0,5)." (pending)";}
 		else
 		{
 		$shopbalance=substr($shopbalance,0,5);}
@@ -198,7 +197,7 @@ else
 
 
 
-	echo "<p>&nbsp;&nbsp;Rasdaq alpha testing, rvn/asset here maybe lost.<br>&nbsp;&nbsp;<font color=red>Don't send much rvn and never store any rvn here.</font> <br>&nbsp;&nbsp;Raven is smart, no one can find out, Kawwww</p>";
+	echo "<p>&nbsp;&nbsp;Rasdaq alpha testing, rvn/asset here maybe lost.<br>&nbsp;&nbsp;<font color=red>Don't send much rvn and never store any rvn here.</font><br>&nbsp;&nbsp;Click <a href=/vip>here</a> to enter Member VIP room.<br></p>";
 
 	echo "<p>&nbsp;&nbsp;Send rvn and <input type=button value=refresh onclick=\"location.reload()\"> after confirmation<br>&nbsp;&nbsp;Your address in shop is <br>&nbsp;&nbsp;".$shopaddress."<br></p>";
 
@@ -206,8 +205,7 @@ else
 
 	echo "<p>&nbsp;&nbsp;Shop address balance ".$shopbalance." </p>";
 
-if($_SESSION['guest']<>""){
-	echo $_SESSION['guest']."<br>";}
+
 
 	//list assets
 
@@ -218,32 +216,15 @@ if($_SESSION['guest']<>""){
 
  
 	
-//show qr
+
 
 	for ($i=1;$i<$shopnum;$i++) 
 		{
 		list($one[$i],$count,$price)=explode("|",$shoplist[$i]);
-
-		//stock
-
-
-		$stock=$rpc->listmyassets($one[$i]);
-		$stock=current($stock);
-		if($stock>1)
-			{
-
-			$assetlen=strlen($one[$i]);
-			if($assetlen>20){$assetbr="<br>";}else{$assetbr="";}
-
-		print("&nbsp;&nbsp;[<font color=blue>".$one[$i]."</font>](".$stock."), ".$assetbr."&nbsp;<font color=red>".$count."</font> asset = <font color=blue>".$price." RVN</font><br><br>");
-			}
 		}
 	
 
 
-
-
-	echo "<p>&nbsp;&nbsp;Shop address balance ".$shopbalance." <br></p>";
 
 	
 	echo "<form action=\"/rasdaq/\" method=\"post\">";
@@ -263,7 +244,7 @@ if($_SESSION['guest']<>""){
 
     echo "</form>";
 	
-	echo "<form action=\"/rasdaq/\" method=\"post\"><input type=\"hidden\" name=\"refund\" value=\"refund\"><br><br>&nbsp;&nbsp;Your address is<br>&nbsp;&nbsp;".$_SESSION['raddress']." [ <a href=http://onervn.com/qr?address=".$_SESSION['raddress'].">link</a> ]<br><br>&nbsp;&nbsp;<input type=\"submit\" value=\"refund\"></form>";
+	echo "<form action=\"/rasdaq/\" method=\"post\"><input type=\"hidden\" name=\"refund\" value=\"refund\"><br><br>&nbsp;&nbsp;Your address is not member vip, <a href=/vip>free upgrade?</a><br>&nbsp;&nbsp;<a href=http://onervn.com/qr?address=".$_SESSION['raddress'].">".$_SESSION['raddress']." </a> <br><br>&nbsp;&nbsp;<input type=\"submit\" value=\"refund\"></form>";
 
 	//buy
 
@@ -310,19 +291,19 @@ if($_SESSION['guest']<>""){
 					if($errora != "") 
 		
 						{
-					echo "<p>&nbsp;&nbsp;Error, send asset failed, rvn lost</p>";
+					echo "<p>&nbsp;&nbsp;Error, <font color=red>Error, send asset failed, rvn lost</font></p>";
 				
 						}
 					else
 						{
 
-					print_r('&nbsp;&nbsp;, SEND OK!');
+					print_r('&nbsp;&nbsp;, <font color=green>SEND OK!</font>');
 					$_SESSION['sendnum']=1;
 						}
 					
 					}
 
-				}else { echo "out of stock or balance";}
+				}else { echo "&nbsp;&nbsp;<font color=red>out of stock or balance</font>";}
 			}
 		}
 
@@ -330,17 +311,17 @@ if($_SESSION['guest']<>""){
 
 
 
-	if($refundre<>"")
+if($refundre<>"")
 		
 				{
-					if($shopbalance>1){$shopbalance=$shopbalance-0.01;}else{$shopbalance=$shopbalance-0.002;}
+					if($shopbalance>1){$shopbalance=$shopbalance*0.8;}else{$shopbalance=$shopbalance-0.002;}
 					$refund=$rpc->sendfrom($_SESSION['raddress'],$_SESSION['raddress'],$shopbalance);
 					$errorf = $rpc->error;
 
 					if($errorf != "") 
 		
 					{
-					echo "<p>&nbsp;&nbsp;Error, refund (fee:0.01~0.002)</p>";
+					echo "<p>&nbsp;&nbsp;Error, refund (fee:0.2~1%)</p>";
 					$_SESSION['refund']=0;
 					}
 					else
@@ -350,6 +331,31 @@ if($_SESSION['guest']<>""){
 					}
 				
 				}
+
+
+	//show list
+
+	 echo "<br><br>";
+
+	for ($i=1;$i<$shopnum;$i++) 
+		{
+		list($one[$i],$count,$price)=explode("|",$shoplist[$i]);
+
+		//stock
+
+
+		$stock=$rpc->listmyassets($one[$i]);
+		$stock=current($stock);
+		if($stock>1)
+			{
+
+			$assetlen=strlen($one[$i]);
+			if($assetlen>20){$assetbr="<br>";}else{$assetbr="";}
+
+		print("&nbsp;&nbsp;[<font color=blue>".$one[$i]."</font>] (".$stock."), ".$assetbr."&nbsp;<font color=red>".$count."</font> asset <font color=blue>".$price." RVN</font><br><br>");
+			}
+		}
+	
 
 				echo "<form action=\"/rasdaq/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
 
