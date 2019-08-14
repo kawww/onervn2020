@@ -49,6 +49,11 @@
 
 <?php
 
+//check server
+session_start();
+
+include("../server.php");
+
 //check address
 
 if(!$_REQUEST["address"])
@@ -62,7 +67,7 @@ if(!$_REQUEST["address"])
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
 	</form><br><h4><a href=\"http://onervn.com/qr?address=RTyyjWdBWb8JZx1dKeXRHXsPcPBSz82WhJ\" >RTyyjWdBWb8JZx1dKeXRHXsPcPBSz82WhJ</a></h4>";
 
-	include("../foot.txt");
+	include("../foot.php");
 	echo "</center>";
 
 	}
@@ -78,7 +83,7 @@ else
 
 	//rpc
 
-	include("../rpc.php");
+
 
 	$address=trim($_REQUEST["address"]);
 

@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
-        <title>ONE RVN ONE WORLD</title>
+        <title>RAVEN INSIDE</title>
         <meta name="description" content="">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
@@ -28,10 +28,6 @@
         <!-- Fallback for everything else -->
         <link rel="shortcut icon" href="/img/touch/apple-touch-icon.png">
 
-        <!--
-            Chrome 31+ has home screen icon 192×192 (the recommended size for multiple resolutions).
-            If it’s not defined on that size it will take 128×128.
-        -->
         <link rel="icon" sizes="192x192" href="/img/touch/touch-icon-192x192.png">
         <link rel="icon" sizes="128x128" href="/img/touch/touch-icon-128x128.png">
 
@@ -39,31 +35,10 @@
         <meta name="msapplication-TileImage" content="/img/touch/apple-touch-icon-144x144-precomposed.png">
         <meta name="msapplication-TileColor" content="#222222">
 
-        <!-- SEO: If mobile URL is different from desktop URL, add a canonical link to the desktop page -->
-        <!--
-        <link rel="canonical" href="http://www.example.com/" >
-        -->
-
-        <!-- Add to homescreen for Chrome on Android -->
-        <!--
-        <meta name="mobile-web-app-capable" content="yes">
-        -->
-
-        <!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
-        <!--
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="">
-        -->
-
-        <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
-        <!--
-        <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
-        -->
-
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/main.css">
         <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+
     </head>
     <body>
 
@@ -73,42 +48,111 @@
         <script src="/js/helper.js"></script>
         <script src="/js/main.js"></script>
 
-		<center><H1>ONE RVN ONE WORLD</H1>
+<?php
 
-		onervn.com<br>
-		
-		<img src=/img/chead.jpg><br><br>
+//check server
 
-		<form action="search/" method="post">
-		<h3>
-		Asset: <input type="text" name="asset" style="width:100px;">
-		<input type="submit" value="KAW">
-		</h3>
-		</form><br>
 
-		<h4>
-		<a href="http://onervn.com/search?asset=GETTING_STARTED">GETTING_STARTED</a>
-		<br><br>
-		<a href="/qr" style="color: #000000;text-decoration:none;"><b>asset qr</b></a>&nbsp;|&nbsp;
+include("../server.php");
+
+//get refund
+
+$refundre=$_REQUEST["refund"];
+
+//check address
+
+session_start();
+
+$add=$_REQUEST["address"];
+
+if($_REQUEST["change"]<>"")
+
+	{$add="";
+$_SESSION = array();}
+
+if(!$add & !$_SESSION['raddress'])
+	
+	{
+
+	echo "<center><H1>RAVEN INSIDE</H1>
+	onervn.com/bonus<br><img src=/img/chead.jpg><br><br>
+	<form action=\"/bonus/\" method=\"post\">
+	<h2>Your Address: <input type=\"text\" name=\"address\">
+	<br><br><input type=\"submit\" value=\"KAW\"></h2>
+	</form><br><h3>RAVEN INSIDE is the page support RAVENCOIN and ASSETS airdrop.<br>Input your rvn address, and random get bonus in the raven world.</h3>";
+
+	include("../foot.php");
+	echo "</center>";
+
+	}
+
+
+else
+
+	{
+
+
+
+	//rpc
+
+
+	$address=trim($_REQUEST["address"]);
+
+	//check address
+
+	if(!$address){
+	$address=$_SESSION['raddress'];
+				}
+
+
+	$lena=strlen("RApjEshiuEBhJ5fvX18XVrS3K5712WzDUX");
+	$lenb=strlen($address);
+
+	if($lena<>$lenb)
+
+		{
+
+		echo "<p>&nbsp;&nbsp;Error,your address</p>";
+		exit;
+
+		}	
+
+		else
+				{
+	$_SESSION['raddress']=$address;
+				}
+
+	//generate address
+
+$cap=$rpc->listmyassets("NUKA/COLA/CAP");
+
+		echo "<center><H1>RAVEN INSIDE</H1>
+	onervn.com/bonus<br><img src=/img/chead.jpg><br><br>
+	
+	<h2>Your Address: ".$_SESSION['raddress']."
+	<br><br>bonus cap:".$cap["NUKA/COLA/CAP"]."<br></h2>
+	<br><h3>You will find <font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ffff\">s</font> at the bottom of the raven inside page.</h3>";
+
+				echo "<form action=\"/bonus/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
+
+	include("../foot.php");
+	echo "</center>";
+
+	        
 
 	
 
-		<a href="/rasdaq" style="color: #000000;text-decoration:none;">rasdaq</a>&nbsp;|&nbsp;
+
+	
+
+}
 
 
-		<a href="https://github.com/sudux/onervn" target=_blank style="color: <br><br>#000000;text-decoration:none;">github</a><br><br>
-
-			<a href="https://ravencoin.asset-explorer.net/" target=_blank style="color: #000000;text-decoration:none;">explorer</a>&nbsp;|&nbsp;
-
-				<a href="http://ravenx.net/market" target=_blank style="color: #000000;text-decoration:none;">ravenx</a>&nbsp;|&nbsp;
-
-		<a href="https://faucet.ravenland.org" target=_blank style="color: #000000;text-decoration:none;">faucet</a>&nbsp;
-		
-		</h4>
+?>
 
 
-
-		</center>
-
-	</body>
+    </body>
 </html>
+
+
+

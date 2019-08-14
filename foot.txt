@@ -1,9 +1,12 @@
 ﻿<h4>
-&nbsp;&nbsp;<a href="/qr" style="color: #000000;text-decoration:none;"><b>asset qr</b></a>&nbsp;|&nbsp;
+&nbsp;&nbsp;<a href="/" style="color: #000000;text-decoration:none;">onervn</a>&nbsp;|&nbsp;
 
 <a href="/" style="color: #000000;text-decoration:none;"><b>search</b></a>&nbsp;|&nbsp;
 
 <a href="/rasdaq" style="color: #000000;text-decoration:none;"><b>rasdaq</b></a>&nbsp;|&nbsp;
 
-<a href="/" style="color: #000000;text-decoration:none;">onervn</a>
+<a href="/qr" style="color: #000000;text-decoration:none;"><b>asset qr</b></a>&nbsp;|&nbsp;
+
+<a href="/bonus" style="color: #000000;text-decoration:none;"><b>bonus</b></a>
+			
 </h4>

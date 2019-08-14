@@ -47,6 +47,18 @@
     </head>
     <body>
 
+<?php
+
+
+//check server
+
+
+include("../server.php");
+
+session_start();
+
+?>
+
         <!-- Add your site or application content here -->
 
         <script src="/js/vendor/jquery-2.1.3.min.js"></script>
@@ -65,9 +77,8 @@
 
 <?php
 
-//rpc
 
-include("../rpc.php");
+//rpc
 
 $address=trim(strtoupper($_REQUEST["asset"]));
 
@@ -168,7 +179,7 @@ foreach($age as $x=>$x_value)
 							
 							{
  
-							$x_value=$x_value."&nbsp;&nbsp;<a href=https://faucet.ravenland.org target=_blank style=\"color:green;text-decoration:none;\">[ faucet ]</a>";
+							$x_value=$x_value."&nbsp;&nbsp;<a href=https://faucet.ravenland.org  style=\"color:green;text-decoration:none;\">[ faucet ]</a>";
 
 							}
 						}
@@ -251,7 +262,7 @@ foreach($age as $x=>$x_value)
 							
 							{
  
-							$x_value=$m_value."<a href=https://faucet.ravenland.org target=_blank style=\"color:green;text-decoration:none;\">[ faucet ]</a>";
+							$x_value=$m_value."<a href=https://faucet.ravenland.org  style=\"color:green;text-decoration:none;\">[ faucet ]</a>";
 							}
 						}
 	
@@ -274,7 +285,7 @@ foreach($age as $x=>$x_value)
 							{
  
 
-							$x_value=$m_value."<a href=http://onervn.com/faucet/?asset=".$f_value." target=_blank style=\"color:green;text-decoration:none;\">[ faucet ]</a>";
+							$x_value=$m_value."<a href=http://onervn.com/faucet/?asset=".$f_value."  style=\"color:green;text-decoration:none;\">[ faucet ]</a>";
 							}
 						}
 	
@@ -311,7 +322,7 @@ foreach($age as $x=>$x_value)
 
 echo "<br>&nbsp;&nbsp;<a href=http://onervn.com/search?asset=".$address." style=\"color: #000000;text-decoration:none;\">http://onervn.com/search?asset=".$address."</a>&nbsp;<br><br>";
 
-include("../foot.txt");
+include("../foot.php");
 
 
 ?>

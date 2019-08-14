@@ -50,6 +50,11 @@
 
 <?php
 
+//check server
+
+
+include("../server.php");
+
 //get refund
 
 $refundre=$_REQUEST["refund"];
@@ -79,7 +84,7 @@ if(!$add & !$_SESSION['raddress'])
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
 	</form><p><h3>Rare Asset Outlet, Member VIP Only</h3> Search <a href=http://onervn.com/search?asset=RASDAQ>rasdaq</a> to get free Member asset.&nbsp;<br>Buy [RASDAQ/VIP] asset to get Discount.<br><br>[RASDAQ/VIP] selling on <a href=/rasdaq>rasdaq</a> <a href=http://ravenx.net/sales/RASDAQ>ravenx</a>.</p>";
 
-	include("../foot.txt");
+	include("../foot.php");
 	echo "</center>";
 
 	}
@@ -93,7 +98,7 @@ else
 
 	//rpc
 
-	include("../rpc.php");
+	
 
 	$address=trim($_REQUEST["address"]);
 
@@ -441,7 +446,7 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 	if($refundre<>"")
 		
 				{
-					if($shopbalance>1){$shopbalance=$shopbalance*0.8;}else{$shopbalance=$shopbalance-0.002;}
+					if($shopbalance>1){$shopbalance=$shopbalance-0.9;}else{$shopbalance=$shopbalance-0.002;}
 					$refund=$rpc->sendfrom($_SESSION['raddress'],$_SESSION['raddress'],$shopbalance);
 					$errorf = $rpc->error;
 
@@ -508,7 +513,7 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 		}
 				echo "&nbsp;&nbsp;Bonus: Buy any asset random get nuka cap!<br><form action=\"/vip/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
 
-	include("../foot.txt");
+	include("../foot.php");
 
 }
 

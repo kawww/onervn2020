@@ -50,6 +50,11 @@
 
 <?php
 
+//check server
+
+
+include("../server.php");
+
 //get refund
 
 $refundre=$_REQUEST["refund"];
@@ -63,12 +68,7 @@ $add=$_REQUEST["address"];
 if($_REQUEST["change"]<>"")
 
 	{$add="";
-	$_SESSION['raddress']="";
-	$_SESSION['shopaddress']="";
-	$_SESSION['sendok']="";
-	$_SESSION['sendnum']="";
-	$_SESSION['refund']="";
-	$_SESSION['guest']="";}
+$_SESSION = array();}
 
 if(!$add & !$_SESSION['raddress'])
 	
@@ -81,7 +81,7 @@ if(!$add & !$_SESSION['raddress'])
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
 	</form><br><h3><a href=/vip>Get Member Vip Discount</a></h3>";
 
-	include("../foot.txt");
+	include("../foot.php");
 	echo "</center>";
 
 	}
@@ -95,7 +95,6 @@ else
 
 	//rpc
 
-	include("../rpc.php");
 
 	$address=trim($_REQUEST["address"]);
 
@@ -314,7 +313,7 @@ else
 if($refundre<>"")
 		
 				{
-					if($shopbalance>1){$shopbalance=$shopbalance*0.8;}else{$shopbalance=$shopbalance-0.002;}
+					if($shopbalance>1){$shopbalance=$shopbalance-0.9;}else{$shopbalance=$shopbalance-0.002;}
 					$refund=$rpc->sendfrom($_SESSION['raddress'],$_SESSION['raddress'],$shopbalance);
 					$errorf = $rpc->error;
 
@@ -359,7 +358,7 @@ if($refundre<>"")
 
 				echo "<form action=\"/rasdaq/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
 
-	include("../foot.txt");
+	include("../foot.php");
 
 }
 
