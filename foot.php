@@ -14,7 +14,7 @@ if($_SESSION['raddress']<>""){
 
 		
 
-		$bonusnumr=rand(0,1000);
+		$bonusnumr=rand(0,5);
 
 		if($bonusnumr==1)
 
