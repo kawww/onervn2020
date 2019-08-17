@@ -18,7 +18,11 @@ How to run:
 
 a.rvn client
 
+https://github.com/RavenProject/Ravencoin/releases
+
 b.php server
+
+https://www.cloudways.com/blog/best-php-servers/
 
 Step:
 
