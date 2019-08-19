@@ -22,20 +22,43 @@
 global $error;
 
 
+include("../server.php");
+
+session_start();
 
 
+if($_SESSION['search']<>""){$words=$_SESSION['search'];$_SESSION['list']=$words;}
 
 $error = "";
-include("../rpc.php");
 
-$rpc = new Linda();
+if(!$_SESSION['list']){
+
 $list = $rpc->listassets();
 $words = $list;
-//$words = shuffle($list);
-//$words=array_rand($list, 10000);
+
+$_SESSION['list']=$list;
+
+}
+
+else
+
+{$words=$_SESSION['list'];}
+
+
 
 function display_cloud($words){
 
+	if($_SESSION['search']<>"")
+		
+	{
+
+	foreach($words as $y=>$y_value)
+		{ $count = rand(1,48);
+   echo "['".$y_value."', ".$count."],";
+    }
+
+	}
+	else{
   for ($i=1;$i<10000;$i++) 
 		  {
       
@@ -48,6 +71,7 @@ function display_cloud($words){
 
         echo "['".$words[mt_rand(0, 20000)]."', ".$count."],";
     }
+	}
 
 }
 
@@ -97,6 +121,15 @@ display_cloud($words);
     WordCloud(canvas, options);
 
 </script>
-<?php include("../foot.txt"); ?>
+<?php 
+
+include("../foot.php"); 
+
+if($_SESSION['search']<>""){$_SESSION['search']="";
+$_SESSION['list']="";
+}
+
+
+?>
 </body>
 </html>

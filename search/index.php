@@ -111,10 +111,31 @@ $xfaucet=file_get_contents("sale.txt");
 $xfn=file("sale.txt");
 
 
+
+session_start();
+
+
+
+
+
+if(!$_SESSION['list']){
+
+$rawtransaction = $rpc->listassets();
+
+
+$_SESSION['list']=$rawtransaction;
+
+}
+
+else
+
+{$rawtransaction=$_SESSION['list'];}
 //list assets
 
-$rpc = new Linda();
-$rawtransaction = $rpc->listassets();
+
+
+
+
 
 //check error
 
@@ -135,11 +156,12 @@ $fnum=substr_count($faucet,$address);
 $rnum=substr_count($rfaucet,$address);
 $xnum=substr_count($xfaucet,$address);
 $frnum=$fnum+$rnum;
-echo "<p>&nbsp;&nbsp;".$address."&nbsp;( faucet:".$frnum.", sale:".$xnum." )<br></p>";
+echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( faucet:".$frnum.", sale:".$xnum." )<br>&nbsp;&nbsp;<a href=\"/word\" style=\"color: #000000;text-decoration:none;\">Generate ".$address." universe</a></p>";
 
 //get search data
 
 $age=$rawtransaction;
+$_SESSION['search']=array();
  
 foreach($age as $x=>$x_value)
 
@@ -154,6 +176,8 @@ foreach($age as $x=>$x_value)
 			$f_value=$x_value;
 			$u_value=$x_value;
 			$u_value=str_replace("/","%2F",$u_value);
+		
+			array_push($_SESSION['search'],$x_value);
 	
 
 			//ipfs no
@@ -320,7 +344,7 @@ foreach($age as $x=>$x_value)
 	}	
 }
 
-echo "<br>&nbsp;&nbsp;<a href=http://onervn.com/search?asset=".$address." style=\"color: #000000;text-decoration:none;\">http://onervn.com/search?asset=".$address."</a>&nbsp;<br><br>";
+echo "<br>&nbsp;&nbsp;<a href=http://onervn.com/search?asset=".$address." style=\"color: #000000;text-decoration:none;\">http://onervn.com/search?asset=".$address."</a>&nbsp;<br>";
 
 include("../foot.php");
 
