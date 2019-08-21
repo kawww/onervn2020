@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
-        <title>RAVENCOIN ASSET SHOP</title>
+        <title>RAVENCOIN ASSET to ASSET</title>
         <meta name="description" content="">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
@@ -68,19 +68,21 @@ $add=$_REQUEST["address"];
 if($_REQUEST["change"]<>"")
 
 	{$add="";
+
 $_SESSION = array();}
 
 if(!$add & !$_SESSION['raddress'])
 	
 	{
 
-	echo "<center><H1>RAVENCOIN ASSET SHOP</H1>rvn to asset 
-	onervn.com/rasdaq<br>asset to asset 
-	<a href=/ex>onervn.com/ex</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><img src=/img/rhead.jpg><br><br>
-	<form action=\"/rasdaq/\" method=\"post\">
+	echo "<center><H1>RAVENCOIN ASSET to ASSET</H1>
+	rvn to asset 
+	<a href=/rasdaq>onervn.com/rasdaq</a><br>asset to asset 
+	onervn.com/ex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><img src=/img/rhead.jpg><br><br>
+	<form action=\"/ex/\" method=\"post\">
 	<h2>Your Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
-	</form><br><h3><a href=/vip>Get Member Vip Discount</a></h3>";
+	</form><br>";
 
 	include("../foot.php");
 	echo "</center>";
@@ -180,16 +182,15 @@ else
 	else
 		{$shopaddress=$_SESSION['shopaddress'];}
 
-	$shopbalance=$rpc->getbalance($_SESSION['raddress']);
+	$shopbalancea=$rpc->listassetbalancesbyaddress($_SESSION['shopaddress']);
+	$shopbalance=$shopbalancea["NUKA/COLA/CAP"];
+
 
 	if($refundre<>"" & $_SESSION['refund']=1)
 		{
-		$shopbalance=substr($shopbalance,0,5)." (pending)";}
-		//elseif($_SESSION['sendnum']=1)
-		//{$shopbalance=substr($shopbalance,0,5)." (pending)";}
-		else
-		{
-		$shopbalance=substr($shopbalance,0,5);}
+		$shopbalance=$shopbalance." (pending)";}
+		
+
 
 		
 
@@ -203,7 +204,7 @@ else
 
 	echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=".$shopaddress."><br>";
 
-	echo "<p>&nbsp;&nbsp;Shop address balance ".$shopbalance." </p>";
+	echo "<p>&nbsp;&nbsp;Address cap balance ".$shopbalance." </p>";
 
 
 
@@ -227,7 +228,7 @@ else
 
 
 	
-	echo "<form action=\"/rasdaq/\" method=\"post\">";
+	echo "<form action=\"/ex/\" method=\"post\">";
 
 	$html = '&nbsp;&nbsp;<select name="asset">';
 
@@ -238,13 +239,13 @@ else
 		}
 	$html .= '</select>';
 
-	if($shopbalance>0.002){
+	if($shopbalance>1){
 	echo $html."&nbsp;<input type=\"number\" name=\"num\" style=\"width:50px;\">&nbsp;<input type=\"submit\" value=\"buy\">";$_SESSION['guest']="";}else {
-		$_SESSION['guest']="&nbsp;&nbsp;Shop address balance<0.002, Guest mode"; echo $_SESSION['guest'];}
+		$_SESSION['guest']="&nbsp;&nbsp;Shop address cap balance<2, Guest mode"; echo $_SESSION['guest'];}
 
     echo "</form>";
 	
-	echo "<form action=\"/rasdaq/\" method=\"post\"><input type=\"hidden\" name=\"refund\" value=\"refund\"><br><br>&nbsp;&nbsp;Your address is not member vip, <a href=/vip>free upgrade?</a><br>&nbsp;&nbsp;<a href=http://onervn.com/qr?address=".$_SESSION['raddress'].">".$_SESSION['raddress']." </a> <br><br>&nbsp;&nbsp;<input type=\"submit\" value=\"refund\"></form>";
+	echo "<br><br>&nbsp;&nbsp;</a><br>&nbsp;&nbsp;<a href=http://onervn.com/qr?address=".$_SESSION['raddress'].">".$_SESSION['raddress']." </a> ";
 
 	//buy
 
@@ -268,10 +269,10 @@ else
 			if($stock>$buytotal & $totalfund<$shopbalance)
 				{
 				
-				echo " cost ".$totalfund." RVN";
-				$_SESSION['sendok']="<br>&nbsp;&nbsp;".$buyasset." cost ".$totalfund." RVN, SEND OK!";
+				echo " cost ".$totalfund." CAP";
+				$_SESSION['sendok']="<br>&nbsp;&nbsp;".$buyasset." cost ".$totalfund." CAP, SEND OK!";
 
-				$getfund=$rpc->sendfrom($_SESSION['raddress'],"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo",$totalfund);
+				$getfund=$rpc->transferfromaddress("NUKA/COLA/CAP",$_SESSION['shopaddress'],$totalfund,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","",$_SESSION['shopaddress']);
 
 				$errort = $rpc->error;
 
@@ -291,7 +292,7 @@ else
 					if($errora != "") 
 		
 						{
-					echo "<p>&nbsp;&nbsp;Error, <font color=red>Error, send asset failed, rvn lost</font></p>";
+					echo "<p>&nbsp;&nbsp;Error, <font color=red>Error, send asset failed, cap lost</font></p>";
 				
 						}
 					else
@@ -314,8 +315,8 @@ else
 if($refundre<>"")
 		
 				{
-					if($shopbalance>1){$shopbalance=$shopbalance-0.9;}else{$shopbalance=$shopbalance-0.002;}
-					$refund=$rpc->sendfrom($_SESSION['raddress'],$_SESSION['raddress'],$shopbalance);
+					$xaddress="\"".$address."\"";
+					$refund=$rpc->transferfromaddress("NUKA/COLA/CAP",$_SESSION['shopaddress'],$shopbalance,$xaddress);
 					$errorf = $rpc->error;
 
 					if($errorf != "") 
@@ -352,12 +353,12 @@ if($refundre<>"")
 			$assetlen=strlen($one[$i]);
 			if($assetlen>20){$assetbr="<br>";}else{$assetbr="";}
 
-		print("&nbsp;&nbsp;[<font color=blue>".$one[$i]."</font>] (".$stock."), ".$assetbr."&nbsp;<font color=red>".$count."</font> asset <font color=blue>".$price." RVN</font><br><br>");
+		print("&nbsp;&nbsp;[<font color=blue>".$one[$i]."</font>] (".$stock."), ".$assetbr."&nbsp;<font color=red>".$count."</font> asset <font color=blue>".$price." CAP</font><br><br>");
 			}
 		}
 	
 
-				echo "<form action=\"/rasdaq/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
+				echo "<form action=\"/ex/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
 
 	include("../foot.php");
 

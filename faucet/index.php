@@ -39,23 +39,16 @@
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/main.css">
         <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
-    </head>
-    <body>
+    
+
 
         <!-- Add your site or application content here -->
 
         <script src="/js/vendor/jquery-2.1.3.min.js"></script>
         <script src="/js/helper.js"></script>
         <script src="/js/main.js"></script>
-
-<center>
-		<H1>RAVENCOIN ASSET FAUCET</H1>
-
-			onervn.com<br>
-			<img src=/img/rhead.jpg><br>
-
+		</head>
 <?php
-
 
 session_start();
 
@@ -65,6 +58,23 @@ $asset=trim(strtoupper($_REQUEST["asset"]));
 $address=trim($_REQUEST["address"]);
 
 $ax=$asset;
+
+$filename = "../img/".strtolower($asset).".jpg"; 
+
+
+
+if(!file_exists($filename))
+{
+echo "<body><center><H1>RAVENCOIN ASSET FAUCET</H1>onervn.com<br><img src=/img/rhead.jpg><br>";}
+
+else
+
+{echo "<body style=\"background-color:black;filter: invert(100%);\"><center><H1>RAVENCOIN ASSET FAUCET</H1>onervn.com<br><br><p style=\"filter: invert(100%);\"><img src=/img/".strtolower($asset).".jpg ></p><br>";}
+
+
+
+
+
 
 //rpc
 
@@ -126,6 +136,7 @@ else
 
 		echo "<p>&nbsp;&nbsp;not vaild address, kawwww<br><br><a href=http://onervn.com/faucet/?asset=".$asset.">http://onervn.com/faucet/?asset=".$asset."</a></p><br>";
 		echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://onervn.com/faucet/?asset=".$asset."><br>";
+		include("../foot.txt");
 		exit;
 
 			}
@@ -141,7 +152,7 @@ else
 
 		echo "<p>&nbsp;&nbsp;one time one asset, kawwww<br><br><a href=http://onervn.com/faucet/?asset=".$asset.">http://onervn.com/faucet/?asset=".$asset."</a></p><br>";
 		echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://onervn.com/faucet/?asset=".$asset."><br>";
-
+		include("../foot.txt");
 		exit;
 				}
 			}
@@ -156,7 +167,7 @@ else
 		echo "<p>&nbsp;&nbsp;BLOCK=".$_SESSION['blockn']." wait one block, kawwww<br><br><a href=http://onervn.com/faucet/?asset=".$asset.">http://onervn.com/faucet/?asset=".$asset."</a></p><br>";
 
 		echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://onervn.com/faucet/?asset=".$asset."><br>";
-
+		include("../foot.txt");
 		exit;
 
 			}
@@ -190,6 +201,7 @@ else
 				echo "<p>&nbsp;&nbsp;RXqqoufS2fPYtjVgFAmaPQKHoS6W6iwW5b balance < 0.1, faucet stopped , kawwww<br><br><a href=http://onervn.com/faucet/?asset=".$asset.">http://onervn.com/faucet/?asset=".$asset."</a></p></br>";
 
 				echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://onervn.com/faucet/?asset=".$asset."><br>";
+				include("../foot.txt");
 				exit;
 
 				}
@@ -207,17 +219,17 @@ else
 				echo "<p>error<br><br><a href=http://onervn.com/faucet/?asset=".$asset.">http://onervn.com/faucet/?asset=".$asset."</a></p><br>";
 
 				echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://onervn.com/faucet/?asset=".$asset."><br>";
-
+				
 				}
 
 			else
 
 				{
 
-				echo "<p>send ok. kawwww<br><br><a href=http://onervn.com/faucet/?asset=".$asset.">http://onervn.com/faucet/?asset=".$asset."</a></p><br>";
+				echo "<p>send to <a href=http://onervn.com/qr?address=".$address.">".$address."</a> ok. <br><br>kawwww<br><br><a href=http://onervn.com/faucet/?asset=".$asset.">http://onervn.com/faucet/?asset=".$asset."</a></p><br>";
 
 				echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://onervn.com/faucet/?asset=".$asset."><br>";
-
+			
 				$code = mt_rand(0,1000000);
 				$_SESSION['code'] = $code;
 				$_SESSION['asset']=$asset;
@@ -234,7 +246,7 @@ else
 
 	echo "no asset to send, kawww<br><br><a href=http://onervn.com/faucet/?asset=".$asset.">http://onervn.com/faucet/?asset=".$asset."</a><br><br>";
 	echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://onervn.com/faucet/?asset=".$asset."><br>";
-
+	include("../foot.txt");
 			}
 	}
 
