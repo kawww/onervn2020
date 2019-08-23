@@ -467,13 +467,29 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 				//list assets
 
 
+$shopbalancea=$rpc->listassetbalancesbyaddress($_SESSION['shopaddress']);
+$shopbalance=$shopbalancea["RASDAQ"];
+	if(!$shopbalance){$shopbalance=0;}
 
+ echo "<br>&nbsp;&nbsp;Shop rasdaq balance: ".$shopbalance."<br>&nbsp;&nbsp;Spend 1 rasdaq to see hidden price<br><form action=\"/vip/\" method=\"post\"><input type=\"hidden\" name=\"aparecium\" value=\"aparecium\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"aparecium\"></form><br><br>";
 
- echo "<br><br>";
-	
+if($_REQUEST["aparecium"]<>"" & $shopbalance>0)
+		{$getfund=$rpc->transferfromaddress("RASDAQ",$_SESSION['shopaddress'],1,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","",$_SESSION['shopaddress']);
+		$errora= $rpc->error;
+		if($errort != "") 
+		
+					{
+					echo "<p>&nbsp;&nbsp;Error,  failed</p>";
+				
+					}
+					else
+					{$_SESSION['aparecium']=1;}
+
+		}
+
 //show list
 
-	if($shopbalance>0 & $shopnew==$shopcheck)
+	if($shopnew==$shopcheck or $_SESSION['aparecium']==1)
 	{
 
 	for ($i=1;$i<$shopnum;$i++) 

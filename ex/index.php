@@ -185,6 +185,8 @@ else
 	$shopbalancea=$rpc->listassetbalancesbyaddress($_SESSION['shopaddress']);
 	$shopbalance=$shopbalancea["NUKA/COLA/CAP"];
 
+	if(!$shopbalance){$shopbalance=0;}
+
 
 	if($refundre<>"" & $_SESSION['refund']=1)
 		{
@@ -239,9 +241,9 @@ else
 		}
 	$html .= '</select>';
 
-	if($shopbalance>1){
+	if($shopbalance>=1){
 	echo $html."&nbsp;<input type=\"number\" name=\"num\" style=\"width:50px;\">&nbsp;<input type=\"submit\" value=\"buy\">";$_SESSION['guest']="";}else {
-		$_SESSION['guest']="&nbsp;&nbsp;Shop address cap balance<2, Guest mode"; echo $_SESSION['guest'];}
+		$_SESSION['guest']="&nbsp;&nbsp;Shop address cap balance<1, Guest mode"; echo $_SESSION['guest'];}
 
     echo "</form>";
 	
@@ -266,7 +268,7 @@ else
 			$stock=$rpc->listmyassets($one[$i]);
 			$stock=current($stock);
 			$totalfund=$buytotal*$price;
-			if($stock>$buytotal & $totalfund<$shopbalance)
+			if($stock>$buytotal & $totalfund<=$shopbalance)
 				{
 				
 				echo " cost ".$totalfund." CAP";
