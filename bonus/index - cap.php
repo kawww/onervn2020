@@ -124,15 +124,13 @@ else
 
 	//generate address
 
-
 $cap=$rpc->listmyassets("NUKA/COLA/CAP");
-$cake=$rpc->listmyassets("MOONCAKE");
 
 		echo "<center><H1>RAVEN INSIDE</H1>
 	onervn.com/bonus<br><img src=/img/inside.jpg><br><br>
 	
 	<h2>Your Address: ".$_SESSION['raddress']."
-	<br><br>bonus cap:".$cap["NUKA/COLA/CAP"]."<br>mooncake:".$cake["MOONCAKE"]."<br></h2><input type=button value=\"pick a cap\" onclick=\"location.reload()\"> 
+	<br><br>bonus cap:".$cap["NUKA/COLA/CAP"]."<br></h2>
 	<br><h3>You will find <font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ffff\">s</font> at the bottom of the raven inside page.<br>Share your link to get more caps</h3><br>http://onervn.com/bonus/?address=".$_SESSION['raddress']."";
 
 				echo "<form action=\"/bonus/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
