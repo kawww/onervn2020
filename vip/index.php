@@ -247,7 +247,7 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 
 
 
-	echo "<p>&nbsp;&nbsp;Rasdaq alpha testing, rvn/asset here maybe lost.<br>&nbsp;&nbsp;<font color=red>Don't send much rvn and never store any rvn here.</font></p>";
+	echo "<p>&nbsp;&nbsp;Rasdaq alpha testing, rvn/asset here maybe lost.<br>&nbsp;&nbsp;<font color=red>Don't send much rvn and never store any rvn here.</font><br>&nbsp;&nbsp;<a href=/rasdaq>rasdaq</a> | <a href=/ex>ex</a> | <a href=/wts>wts</a> | <b>vip</b> |</p>";
 
 	echo "<p>&nbsp;&nbsp;Send rvn and <input type=button value=refresh onclick=\"location.reload()\"> after confirmation<br>&nbsp;&nbsp;Your address in shop is <br>&nbsp;&nbsp;".$shopaddress."<br></p>";
 
@@ -529,7 +529,7 @@ if($_REQUEST["aparecium"]<>"" & $shopbalance>0)
 		}
 				echo "&nbsp;&nbsp;Bonus: Buy any asset random get nuka cap!<br><form action=\"/vip/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
 
-	include("../foot.php");
+	include("../foot.txt");
 
 }
 

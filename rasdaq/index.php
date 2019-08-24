@@ -76,7 +76,8 @@ if(!$add & !$_SESSION['raddress'])
 
 	echo "<center><H1>RAVENCOIN ASSET SHOP</H1>rvn to asset 
 	onervn.com/rasdaq<br>asset to asset 
-	<a href=/ex>onervn.com/ex</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><img src=/img/rhead.jpg><br><br>
+	<a href=/ex>onervn.com/ex</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>asset to rvn 
+	<a href=/wts>onervn.com/wts</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><img src=/img/rhead.jpg><br><br>
 	<form action=\"/rasdaq/\" method=\"post\">
 	<h2>Your Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
@@ -197,7 +198,7 @@ else
 
 
 
-	echo "<p>&nbsp;&nbsp;Rasdaq alpha testing, rvn/asset here maybe lost.<br>&nbsp;&nbsp;<font color=red>Don't send much rvn and never store any rvn here.</font><br>&nbsp;&nbsp;Click <a href=/vip>here</a> to enter Member VIP room.<br></p>";
+	echo "<p>&nbsp;&nbsp;Rasdaq alpha testing, rvn/asset here maybe lost.<br>&nbsp;&nbsp;<font color=red>Don't send much rvn and never store any rvn here.</font><br>&nbsp;&nbsp;<b>rasdaq</b> | <a href=/ex>ex</a> | <a href=/wts>wts</a> | <a href=/vip>vip</a> |</p>";
 
 	echo "<p>&nbsp;&nbsp;Send rvn and <input type=button value=refresh onclick=\"location.reload()\"> after confirmation<br>&nbsp;&nbsp;Your address in shop is <br>&nbsp;&nbsp;".$shopaddress."<br></p>";
 
@@ -359,7 +360,7 @@ if($refundre<>"")
 
 				echo "<form action=\"/rasdaq/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
 
-	include("../foot.php");
+	include("../foot.txt");
 
 }
 

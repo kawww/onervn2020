@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
-        <title>RAVENCOIN ASSET to ASSET</title>
+        <title>RAVENCOIN ASSET to RVN</title>
         <meta name="description" content="">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
@@ -75,12 +75,12 @@ if(!$add & !$_SESSION['raddress'])
 	
 	{
 
-	echo "<center><H1>RAVENCOIN ASSET to ASSET</H1>
+	echo "<center><H1>RAVENCOIN ASSET to RVN</H1>
 	rvn to asset 
 	<a href=/rasdaq>onervn.com/rasdaq</a><br>asset to asset 
-	onervn.com/ex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>asset to rvn 
-	<a href=/wts>onervn.com/wts</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><img src=/img/rhead.jpg><br><br>
-	<form action=\"/ex/\" method=\"post\">
+	<a href=/ex>onervn.com/ex</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>asset to rvn 
+	onervn.com/wts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><img src=/img/rhead.jpg><br><br>
+	<form action=\"/wts/\" method=\"post\">
 	<h2>Your Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
 	</form><br>";
@@ -183,33 +183,32 @@ else
 	else
 		{$shopaddress=$_SESSION['shopaddress'];}
 
-	$shopbalancea=$rpc->listassetbalancesbyaddress($_SESSION['shopaddress']);
+	$shopasset=$rpc->listassetbalancesbyaddress($_SESSION['shopaddress']);
+	$rvnbalance=$rpc->getbalance("RH7w7cESDVJ22hyv5b46LiU8Ryz1m4YmtT");
+	$shopbalancea=$rpc->listassetbalancesbyaddress("RVsCiRKTcwvb45aktM9utZxbuWicHCS4Hw");
 	$shopbalance=$shopbalancea["NUKA/COLA/CAP"];
 
 	if(!$shopbalance){$shopbalance=0;}
 
 
-	if($refundre<>"" & $_SESSION['refund']=1)
-		{
-		$shopbalance=$shopbalance." (pending)";}
-		
-
-
-		
-
-		
-
-
-
-	echo "<p>&nbsp;&nbsp;Rasdaq alpha testing, rvn/asset here maybe lost.<br>&nbsp;&nbsp;<font color=red>Don't send much rvn and never store any rvn here.</font><br>&nbsp;&nbsp;<a href=/rasdaq>rasdaq</a> | <b>ex</b> | <a href=/wts>wts</a> | <a href=/vip>vip</a> |</p>";
+	
+	echo "<p>&nbsp;&nbsp;Rasdaq alpha testing, rvn/asset here maybe lost.<br>&nbsp;&nbsp;<font color=red>Don't send much rvn and never store any rvn here.</font><br>&nbsp;&nbsp;<a href=/rasdaq>rasdaq</a> | <a href=/ex>ex</a> | <b>wts</b> | <a href=/vip>vip</a> |</p>";
 
 	echo "<p>&nbsp;&nbsp;Send asset and <input type=button value=refresh onclick=\"location.reload()\"> after confirmation<br>&nbsp;&nbsp;Your address in shop is <br>&nbsp;&nbsp;".$shopaddress."<br></p>";
 
 	echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=".$shopaddress."><br>";
+	echo "<p>&nbsp;&nbsp;shop address asset </p><p>";
 
-	
+	foreach($shopasset as $x=>$x_value)
 
-	echo "<p>&nbsp;&nbsp;Address cap balance ".$shopbalance." </p>";
+			{
+			
+			
+	echo "<form action=\"/wts/\" method=\"post\">&nbsp;&nbsp;<font color=blue>".$x."&nbsp;&nbsp;[ ".$x_value." ]</font><input type=\"hidden\" name=\"asset\" value=\"".$x."\"><input type=\"hidden\" name=\"num\" value=\"".$x_value."\">&nbsp;<input type=\"submit\" value=\"sell\"></form>";
+			
+			}
+
+	echo "</p><p>&nbsp;&nbsp;rvn balance ".$rvnbalance." </p>";
 
 
 
@@ -220,25 +219,15 @@ else
 	$shopnum=count($shoplist);
 
 
- for ($i=1;$i<$shopnum;$i++) 
-		{
-		list($one[$i],$count,$price)=explode("|",$shoplist[$i]);
-		}
+ 
 	
+
+
+
+
+
 	
-	echo "<form action=\"/ex/\" method=\"post\">";
-	$html = '&nbsp;&nbsp;<select name="asset">';
-	foreach($one as $vo)
-		{
-		if(preg_match('/[a-zA-Z]/',$vo)){
-		$html .= '<option value="'.$vo.'">'.$vo.'</option>';}
-		}
-	$html .= '</select>';
-	if($shopbalance>=1){
-	echo $html."&nbsp;<input type=\"number\" name=\"num\" style=\"width:50px;\">&nbsp;<input type=\"submit\" value=\"buy\">";$_SESSION['guest']="";}else {
-		$_SESSION['guest']="&nbsp;&nbsp;Shop address cap balance<1, Guest mode"; echo $_SESSION['guest'];}
-    echo "</form>";
-	
+
 	
 	echo "<br><br>&nbsp;&nbsp;</a><br>&nbsp;&nbsp;<a href=http://onervn.com/qr?address=".$_SESSION['raddress'].">".$_SESSION['raddress']." </a> ";
 
@@ -248,6 +237,7 @@ else
 	$buynum=trim($_REQUEST["num"]);
 
 	echo "<br>&nbsp;&nbsp;".$buyasset." ";
+
 	
 
 	for ($i=1;$i<$shopnum;$i++) 
@@ -258,16 +248,17 @@ else
 			
 		{$buytotal=$buynum*$count;
 			echo $buytotal;
-			$stock=$rpc->listmyassets($one[$i]);
-			$stock=current($stock);
+			$stock=$shopbalance;
+			
 			$totalfund=$buytotal*$price;
-			if($stock>$buytotal & $totalfund<=$shopbalance)
+			if($stock>$buytotal & $totalfund<=$rvnbalance)
 				{
 				
-				echo " cost ".$totalfund." CAP";
+				echo " cost ".$totalfund." RVN";
 				$_SESSION['sendok']="<br>&nbsp;&nbsp;".$buyasset." cost ".$totalfund." CAP, SEND OK!";
 
-				$getfund=$rpc->transferfromaddress("NUKA/COLA/CAP",$_SESSION['shopaddress'],$totalfund,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","",$_SESSION['shopaddress']);
+				$getfunda=$rpc->transferfromaddress("NUKA/COLA/CAP","RVsCiRKTcwvb45aktM9utZxbuWicHCS4Hw",$buytotal,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","","RVsCiRKTcwvb45aktM9utZxbuWicHCS4Hw");
+				$getfundb=$rpc->transferfromaddress($buyasset,$_SESSION['shopaddress'],$buytotal,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","",$_SESSION['shopaddress']);
 
 				$errort = $rpc->error;
 
@@ -280,14 +271,14 @@ else
 					else
 					{
 					
-					$sendasset=$rpc->transfer($buyasset,$buytotal,$_SESSION['raddress']);
+					$sendfund=$rpc->sendfrom("RH7w7cESDVJ22hyv5b46LiU8Ryz1m4YmtT",$_SESSION['raddress'],$totalfund);
 
 					$errora = $rpc->error;
 
 					if($errora != "") 
 		
 						{
-					echo "<p>&nbsp;&nbsp;Error, <font color=red>Error, send asset failed, cap lost</font></p>";
+					echo "<p>&nbsp;&nbsp;Error, <font color=red>Error, send asset failed, rvn lost</font></p>";
 				
 						}
 					else
@@ -340,20 +331,17 @@ if($refundre<>"")
 		//stock
 
 
-		$stock=$rpc->listmyassets($one[$i]);
-		$stock=current($stock);
-		if($stock>1)
-			{
+	
+	
 
 			$assetlen=strlen($one[$i]);
 			if($assetlen>20){$assetbr="<br>";}else{$assetbr="";}
 
-		print("&nbsp;&nbsp;[<font color=blue>".$one[$i]."</font>] (".$stock."), ".$assetbr."&nbsp;<font color=red>".$count."</font> asset <font color=blue>".$price." CAP</font><br><br>");
+		print("&nbsp;&nbsp;[<font color=blue>".$one[$i]."</font>] want (".$shopbalance."), ".$assetbr."&nbsp;<font color=red>".$count."</font> asset <font color=blue>".$price." </font><br><br>");
 			}
-		}
 	
 
-				echo "<form action=\"/ex/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
+				echo "<form action=\"/wts/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
 
 	include("../foot.txt");
 

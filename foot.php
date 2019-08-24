@@ -25,9 +25,14 @@ if($_SESSION['raddress']<>""){
 		$ctime=60-$btime;
 
 		if($btime>60)				{
-		$bonusr=$rpc->transfer("MOONCAKE",1,$_SESSION['raddress']);
+		$bonusr=$rpc->transfer("NUKA/COLA/CAP",1,$_SESSION['raddress']);
+		
+		//event
+		$mk="";
+		$mooncake=rand(0,1);
+		if($mooncake==1){$bonusr=$rpc->transfer("MOONCAKE",1,$_SESSION['raddress']);$mk="1 mooncake";}
 
-		echo "<a href=\"/bonus\" style=\"color: #000000;text-decoration:none;\"><font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ffff\">s</font>: ".$bonusnumr." mooncake</a>";
+		echo "<a href=\"/bonus\" style=\"color: #000000;text-decoration:none;\"><font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ffff\">s</font>: ".$bonusnumr." caps ".$mk."</a>";
 
 		$_SESSION['bonustime']=time();}
 
