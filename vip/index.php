@@ -258,7 +258,7 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 
 //	buy
 
-	$shoplist=file("shop.txt");
+$shoplist=file("shop.txt");
 	$shopnum=count($shoplist);
 
 
@@ -324,15 +324,18 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 		}
 
 
- $shopnew=number_format($shopnew, 3, '.', '');
- $shopcheck=number_format($shopcheck, 3, '.', '');
+ $shopnew=number_format($shopnew, 2, '.', '');
+ $shopcheck=number_format($shopcheck, 2, '.', '');
 
-
+//echo $shopnew."-".$shopcheck;
 
 
 	if($shopbalance>0 & $shopnew==$shopcheck)
 
 		{
+
+	
+
 
 		echo $html."&nbsp;<input type=\"number\" name=\"num\" style=\"width:50px;\">&nbsp;<input type=\"submit\" value=\"buy\">";$_SESSION['guest']="";
 		$_SESSION['pass']=1;
@@ -345,7 +348,7 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 		echo $_SESSION['guest'];
 		}
 
-    echo "</form>";
+    echo "</form><br>";
 	
 	
 
@@ -380,6 +383,7 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 
 	echo "<br>&nbsp;&nbsp;".$buyasset." ";
 	
+if($buyasset<>""){
 
 	for ($i=1;$i<$shopnum;$i++) 
 		{
@@ -438,7 +442,7 @@ $getviplist = $rpc->listassetbalancesbyaddress($address);
 				}else { echo "&nbsp;&nbsp;<font color=red>out of stock or balance</font>";}
 			}
 		}
-
+}
 	//refund
 
 
@@ -474,6 +478,7 @@ $shopbalance=$shopbalancea["RASDAQ"];
  echo "<br>&nbsp;&nbsp;Shop rasdaq balance: ".$shopbalance."<br>&nbsp;&nbsp;Spend 1 rasdaq to see hidden price<br><form action=\"/vip/\" method=\"post\"><input type=\"hidden\" name=\"aparecium\" value=\"aparecium\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"aparecium\"></form><br><br>";
 
 if($_REQUEST["aparecium"]<>"" & $shopbalance>0)
+
 		{$getfund=$rpc->transferfromaddress("RASDAQ",$_SESSION['shopaddress'],1,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","",$_SESSION['shopaddress']);
 		$errora= $rpc->error;
 		if($errort != "") 

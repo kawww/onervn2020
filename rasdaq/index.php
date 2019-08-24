@@ -210,8 +210,7 @@ else
 
 	//list assets
 
-
-	$shoplist=file("shop.txt");
+$shoplist=file("shop.txt");
 	$shopnum=count($shoplist);
 
 
@@ -238,8 +237,13 @@ else
 		$html .= '<option value="'.$vo.'">'.$vo.'</option>';}
 		}
 	$html .= '</select>';
+	
 
 	if($shopbalance>0.002){
+
+
+
+
 	echo $html."&nbsp;<input type=\"number\" name=\"num\" style=\"width:50px;\">&nbsp;<input type=\"submit\" value=\"buy\">";$_SESSION['guest']="";}else {
 		$_SESSION['guest']="&nbsp;&nbsp;Shop address balance<0.002, Guest mode"; echo $_SESSION['guest'];}
 
@@ -254,7 +258,7 @@ else
 
 	echo "<br>&nbsp;&nbsp;".$buyasset." ";
 	
-
+if($buyasset<>""){
 	for ($i=1;$i<$shopnum;$i++) 
 		{
 		list($one[$i],$count,$price)=explode("|",$shoplist[$i]);
@@ -307,7 +311,7 @@ else
 				}else { echo "&nbsp;&nbsp;<font color=red>out of stock or balance</font>";}
 			}
 		}
-
+}
 	//refund
 
 

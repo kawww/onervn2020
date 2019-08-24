@@ -215,8 +215,6 @@ else
 	//list assets
 
 
-	$shoplist=file("shop.txt");
-	$shopnum=count($shoplist);
 
 
  
@@ -238,7 +236,9 @@ else
 
 	echo "<br>&nbsp;&nbsp;".$buyasset." ";
 
-	
+	$shoplist=file("shop.txt");
+	$shopnum=count($shoplist);
+
 
 	for ($i=1;$i<$shopnum;$i++) 
 		{
@@ -265,7 +265,7 @@ else
 					if($errort != "") 
 		
 					{
-					echo "<p>&nbsp;&nbsp;Error, buy failed</p>";
+					echo "<p>&nbsp;&nbsp;Error, sell failed</p>";
 				
 					}
 					else
@@ -278,13 +278,13 @@ else
 					if($errora != "") 
 		
 						{
-					echo "<p>&nbsp;&nbsp;Error, <font color=red>Error, send asset failed, rvn lost</font></p>";
+					echo "<p>&nbsp;&nbsp;Error, <font color=red>Error, send asset failed, ".$totalfund." rvn lost</font></p>";
 				
 						}
 					else
 						{
 
-					print_r('&nbsp;&nbsp;, <font color=green>SEND OK!</font>');
+					echo "&nbsp;&nbsp;, <font color=green>SEND ".$totalfund." rvn OK!</font>";
 					$_SESSION['sendnum']=1;
 						}
 					

@@ -172,7 +172,7 @@ echo "&nbsp;&nbsp;http://onervn.com/qr?address=".$address."&nbsp;<br><br>";
 
 echo "&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=".$address."><br><br>";
 
-echo "&nbsp;&nbsp;".$address."<br><br>";
+echo "&nbsp;&nbsp;".$address."<br><br>&nbsp;&nbsp;video: <a href=https://twitter.com/runhashrate/status/1157491417578532865>use qr code in ios/android wallet</a>";
 
 include("../foot.txt");
 
