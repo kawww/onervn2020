@@ -34,12 +34,19 @@ if($_SESSION['raddress']<>""){
 
 		echo "<a href=\"/bonus\" style=\"color: #000000;text-decoration:none;\"><font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ffff\">s</font>: ".$bonusnumr." caps ".$mk."</a>";
 
-		$_SESSION['bonustime']=time();}
+		$_SESSION['bonustime']=time();
+		
+		$_SESSION['getcap']="pick ".$bonusnumr." cap ".$mk."";
+
+		
+		}
 
 									else
 
 				{
 					echo "<a href=\"/bonus\" style=\"color: #000000;text-decoration:none;\">bonus: next roll in ".$ctime."s</a>";
+
+
 									}
 					
 
@@ -50,6 +57,8 @@ if($_SESSION['raddress']<>""){
 			{
 
 		echo "<a href=\"/bonus\" style=\"color: #000000;text-decoration:none;\">bonus: Good Luck!</a>";
+
+		$_SESSION['getcap']="nothing +".$bonusnumr;
 
 			}
 
