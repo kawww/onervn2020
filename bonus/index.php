@@ -141,7 +141,7 @@ if(!$gcake){$gcake=0;}
 	
 	echo "<h2>bonus cap: ".$cap['NUKA/COLA/CAP']."<br>mooncake: ".$cake['MOONCAKE']."<br><br>Your Address: ".$_SESSION['raddress']."<br><br>You have ".$gcap." cap and ".$gcake." mooncake</h2>";
 	
-	echo "<input type=button value=\"pick a cap\" onclick=\"location.reload()\"> <br>".$_SESSION['getcap']."<h3>You will find <font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ffff\">s</font> at the bottom of the raven inside page.<br>Share your link to get more caps</h3><br>http://onervn.com/bonus/?address=".$_SESSION['raddress']."";
+	echo "<input type=button value=\"pick up a cap\" onclick=\"location.reload()\"> <br>".$_SESSION['getcap']."<h3>You will find <font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ffff\">s</font> at the bottom of the raven inside page.<br>Share your link to get more caps</h3><br>http://onervn.com/bonus/?address=".$_SESSION['raddress']."";
 
 				echo "<form action=\"/bonus/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
 

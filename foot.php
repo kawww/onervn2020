@@ -36,7 +36,7 @@ if($_SESSION['raddress']<>""){
 
 		$_SESSION['bonustime']=time();
 		
-		$_SESSION['getcap']="pick ".$bonusnumr." cap ".$mk."";
+		$_SESSION['getcap']="<font color=red>pick up ".$bonusnumr." cap ".$mk."</font>";
 
 		
 		}
