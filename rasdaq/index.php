@@ -288,7 +288,7 @@ if($buyasset<>""){
 					}
 					else
 					{
-					
+					usleep(100000);
 					$sendasset=$rpc->transfer($buyasset,$buytotal,$_SESSION['raddress']);
 
 					$errora = $rpc->error;

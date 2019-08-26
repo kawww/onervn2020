@@ -272,7 +272,7 @@ if($buyasset<>""){
 				$_SESSION['sendok']="<br>&nbsp;&nbsp;".$buyasset." cost ".$totalfund." CAP, SEND OK!";
 
 				$getfund=$rpc->transferfromaddress("NUKA/COLA/CAP",$_SESSION['shopaddress'],$totalfund,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","",$_SESSION['shopaddress']);
-
+				
 				$errort = $rpc->error;
 
 					if($errort != "") 
@@ -283,7 +283,7 @@ if($buyasset<>""){
 					}
 					else
 					{
-					
+					usleep(100000);
 					$sendasset=$rpc->transfer($buyasset,$buytotal,$_SESSION['raddress']);
 
 					$errora = $rpc->error;

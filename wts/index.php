@@ -256,8 +256,9 @@ else
 				
 				echo " cost ".$totalfund." RVN";
 				$_SESSION['sendok']="<br>&nbsp;&nbsp;".$buyasset." cost ".$totalfund." CAP, SEND OK!";
-
+				
 				$getfunda=$rpc->transferfromaddress("NUKA/COLA/CAP","RVsCiRKTcwvb45aktM9utZxbuWicHCS4Hw",$buytotal,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","","RVsCiRKTcwvb45aktM9utZxbuWicHCS4Hw");
+				usleep(100000);
 				$getfundb=$rpc->transferfromaddress($buyasset,$_SESSION['shopaddress'],$buytotal,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","",$_SESSION['shopaddress']);
 
 				$errort = $rpc->error;
@@ -270,7 +271,7 @@ else
 					}
 					else
 					{
-					
+					usleep(100000);
 					$sendfund=$rpc->sendfrom("RH7w7cESDVJ22hyv5b46LiU8Ryz1m4YmtT",$_SESSION['raddress'],$totalfund);
 
 					$errora = $rpc->error;

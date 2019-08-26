@@ -207,7 +207,11 @@ else
 
 if($rvnbalance>=0.1)
 
-		{echo "<form action=\"/moon/\" method=\"post\">&nbsp;&nbsp;shop rvn balance ".$rvnbalance." <input type=\"hidden\" name=\"go\" value=\"go\"><input type=\"submit\" value=\"Send rvn\"></form>";}
+		{echo "<form action=\"/moon/\" method=\"post\">&nbsp;&nbsp;shop rvn balance ".$rvnbalance." <input type=\"hidden\" name=\"go\" value=\"go\"><input type=\"submit\" value=\"Send rvn to all\"></form>";
+		
+		echo "<br><form action=\"/moon/\" method=\"post\"><input type=\"hidden\" name=\"luck\" value=\"luck\">&nbsp;&nbsp;<input type=\"hidden\" name=\"go\" value=\"go\"><input type=\"submit\" value=\"Send rvn to lucky guy\"></form>";
+		
+		}
 else{
 	echo "</p><p>&nbsp;&nbsp;shop rvn balance ".$rvnbalance." </p>";}
 
@@ -243,6 +247,8 @@ if($_REQUEST["go"]<>""){
 			if($buyasset<>""){
 		$getfunda=$rpc->transferfromaddress($buyasset,$_SESSION['shopaddress'],1,$y,"","","",$_SESSION['shopaddress']);
 
+		usleep(10000);
+
 		$errort = $rpc->error;
 
 					if($errort != "") 
@@ -253,17 +259,20 @@ if($_REQUEST["go"]<>""){
 					}
 					else
 					{
-					echo "<p>&nbsp;&nbsp;Send ".$buyasset." to <a href=http://onervn.com/qr?address=".$y_value.">".$y."</a> ok</p>";
+					echo "<p>&nbsp;&nbsp;Send <font color=red>".$buyasset."</font> to <a href=http://onervn.com/qr?address=".$y_value.">".$y."</a> ok</p>";
 					}
 			}
 
 		if($rvnbalance>=0.1){
 
+if($_REQUEST["luck"]<>""){$lucknum=rand(0,1);}
 			
 $sendnumr=rand(11,99);
 $sendnum=$sendnumr/1000;
-		$sendfund=$rpc->sendfrom($_SESSION['raddress'],$y,$sendnum);
 
+if($lucknum==1){
+		$sendfund=$rpc->sendfrom($_SESSION['raddress'],$y,$sendnum);
+		
 		$errors = $rpc->error;
 				if($errors != "") 
 		
@@ -273,8 +282,12 @@ $sendnum=$sendnumr/1000;
 					}
 					else
 					{
-					echo "<p>&nbsp;&nbsp;Send ".$sendnum." to <a href=http://onervn.com/qr?address=".$y.">".$y."</a> ok</p>";
+					echo "<p>&nbsp;&nbsp;Send <font color=red>".$sendnum."</font> to <a href=http://onervn.com/qr?address=".$y.">".$y."</a> ok</p>";
 					}
+
+				}else
+
+					{echo "<p>&nbsp;&nbsp;Send <font color=blue>nothing</font> to <a href=http://onervn.com/qr?address=".$y.">".$y."</a></p>";}
 		
 					}
 
