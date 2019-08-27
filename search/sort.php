@@ -158,13 +158,13 @@ $fnum=substr_count($faucet,$address);
 $rnum=substr_count($rfaucet,$address);
 $xnum=substr_count($xfaucet,$address);
 $frnum=$fnum+$rnum;
-echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( faucet:".$frnum.", sale:".$xnum." ) [ <a href=/search/sort.php?asset=".$address." style=\"color: #000000;text-decoration:none;\">Sort</a> ]<br>&nbsp;&nbsp;[ <a href=\"/word\" style=\"color: #000000;text-decoration:none;\">Generate ".$address." universe</a> ]</p>";
+echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( faucet:".$frnum.", sale:".$xnum." ) [ <a href=/search/?asset=".$address." style=\"color: #000000;text-decoration:none;\">Fast</a> ]<br>&nbsp;&nbsp;[ <a href=\"/word\" style=\"color: #000000;text-decoration:none;\">Generate ".$address." universe</a> ]</p>";
 
 //get search data
 
 $age=$rawtransaction;
 $_SESSION['search']=array();
- 
+$_SESSION['ass']=array();
 foreach($age as $y=>$y_value)
 
 	{
@@ -181,16 +181,18 @@ foreach($age as $y=>$y_value)
 			$arr["num"]=$assetnum;
 			$arr["asset"]=$y_value;
 			$arr["ipfs"]=$info['ipfs_hash'];
-			
-array_push($_SESSION['search'],$arr);
+
+array_push($_SESSION['ass'],$arr);
+
+array_push($_SESSION['search'],$arr["asset"]);
 			}
 	}
 
 
 
-arsort($_SESSION['search']);
+arsort($_SESSION['ass']);
 
-$listasset=$_SESSION['search'];
+$listasset=$_SESSION['ass'];
 
 
 
