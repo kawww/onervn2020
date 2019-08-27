@@ -184,8 +184,10 @@ else
 		{$shopaddress=$_SESSION['shopaddress'];}
 
 	$shopasset=$rpc->listassetbalancesbyaddress($_SESSION['shopaddress']);
+	usleep(100000);
 	$rvnbalance=$rpc->getbalance("RH7w7cESDVJ22hyv5b46LiU8Ryz1m4YmtT");
-	$shopbalancea=$rpc->listassetbalancesbyaddress("RVsCiRKTcwvb45aktM9utZxbuWicHCS4Hw");
+	usleep(100000);
+	$shopbalancea=$rpc->listmyassets("NUKA/COLA/CAP");
 	$shopbalance=$shopbalancea["NUKA/COLA/CAP"];
 
 	if(!$shopbalance){$shopbalance=0;}
@@ -257,7 +259,7 @@ else
 				echo " cost ".$totalfund." RVN";
 				$_SESSION['sendok']="<br>&nbsp;&nbsp;".$buyasset." cost ".$totalfund." CAP, SEND OK!";
 				
-				$getfunda=$rpc->transferfromaddress("NUKA/COLA/CAP","RVsCiRKTcwvb45aktM9utZxbuWicHCS4Hw",$buytotal,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","","RVsCiRKTcwvb45aktM9utZxbuWicHCS4Hw");
+				$getfunda=$rpc->transfer("NUKA/COLA/CAP",$buytotal,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo");
 				usleep(100000);
 				$getfundb=$rpc->transferfromaddress($buyasset,$_SESSION['shopaddress'],$buytotal,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","",$_SESSION['shopaddress']);
 

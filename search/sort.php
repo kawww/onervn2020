@@ -66,7 +66,7 @@ session_start();
         <script src="/js/main.js"></script>
 
 
-		<form action="/search/" method="post">
+		<form action="/search/sort.php" method="post">
 		<br>&nbsp;&nbsp;
 		<a href="/" style="color: #000000;text-decoration:none;"><b>RAVENCOIN ASSET SEARCH</b></a>
 		<br><br>&nbsp;&nbsp;
@@ -88,9 +88,9 @@ if(!$address)
 
 	{
     
-	$line = count(file('asset.txt')); 
+	$line = count(file('assetsort.txt')); 
 	$rnd=rand(1,$line);
-	$address=strtoupper(getLine("asset.txt",$rnd));
+	$address=strtoupper(getLine("assetsort.txt",$rnd));
 	$address=preg_replace("/\s/","",$address);
 
 	}
@@ -110,6 +110,8 @@ $rfn=file("../faucet/one.txt");
 $xfaucet=file_get_contents("sale.txt");
 $xfn=file("sale.txt");
 
+$pfaucet=file_get_contents("pass.txt");
+$pfn=file("pass.txt");
 
 
 session_start();
@@ -163,27 +165,48 @@ echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( faucet:".$frnum.
 $age=$rawtransaction;
 $_SESSION['search']=array();
  
-foreach($age as $x=>$x_value)
+foreach($age as $y=>$y_value)
 
 	{
 
-		if(strpos($x_value,$address) !== false)
+		if(strpos($y_value,$address) !== false)
 
 			{
+				if(strpos($pfaucet,$y_value) !== false)
+					{$assetnum="10000+";}else{
+			$assetadd= $rpc->listaddressesbyasset($y_value);
+			$assetnum=count($assetadd);}
+			$info = $rpc->getassetdata($y_value);
+			
+			$arr["num"]=$assetnum;
+			$arr["asset"]=$y_value;
+			$arr["ipfs"]=$info['ipfs_hash'];
+			
+array_push($_SESSION['search'],$arr);
+			}
+	}
 
-			$info = $rpc->getassetdata($x_value);
-			$f_value="";
+
+
+arsort($_SESSION['search']);
+
+$listasset=$_SESSION['search'];
+
+
+
+foreach ($listasset as $k=>$v) 
+			{
+			
+			//ipfs no
+		
+			$x_value=$v["asset"];
+			$ipfs=$v["ipfs"];
+			$assetnum=$v["num"];
 			$f_value=$x_value;
 			$u_value=$x_value;
 			$u_value=str_replace("/","%2F",$u_value);
-		
-			array_push($_SESSION['search'],$x_value);
-	
 
-			//ipfs no
-
-
-			if(!$info['ipfs_hash'])
+			if(!$ipfs)
 
 				{
 
@@ -245,7 +268,7 @@ foreach($age as $x=>$x_value)
 						
 						}
 
-	   					echo "&nbsp;&nbsp;".$x_value."&nbsp;&nbsp;<br>";
+	   					echo "&nbsp;&nbsp;".$x_value." (".$assetnum.")&nbsp;&nbsp;<br>";
 		
 				}
 
@@ -266,7 +289,7 @@ foreach($age as $x=>$x_value)
 					//http://patorjk.com/text-color-fader/
 					}
 	
-				$x_value="&nbsp;&nbsp;<a href=https://gotoipfs.com/#path=".$info['ipfs_hash']." target=_blank style=\"color:blue;text-decoration:none;\">".$x_value."</a>&nbsp;&nbsp;";
+				$x_value="&nbsp;&nbsp;<a href=https://gotoipfs.com/#path=".$ipfs." target=_blank style=\"color:blue;text-decoration:none;\">".$x_value."</a>  (".$assetnum.")&nbsp;&nbsp;";
 
 				$m_value=$x_value;
 
@@ -342,7 +365,7 @@ foreach($age as $x=>$x_value)
 		
 		}
 	}	
-}
+
 
 echo "<br>&nbsp;&nbsp;<a href=http://onervn.com/search?asset=".$address." style=\"color: #000000;text-decoration:none;\">http://onervn.com/search?asset=".$address."</a>&nbsp;<br>";
 
