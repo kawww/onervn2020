@@ -165,6 +165,7 @@ echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( faucet:".$frnum.
 $age=$rawtransaction;
 $_SESSION['search']=array();
 $_SESSION['ass']=array();
+
 foreach($age as $y=>$y_value)
 
 	{
@@ -175,12 +176,18 @@ foreach($age as $y=>$y_value)
 				if(strpos($pfaucet,$y_value) !== false)
 					{$assetnum="10000+";}else{
 			$assetadd= $rpc->listaddressesbyasset($y_value);
-			$assetnum=count($assetadd);}
+			
+			$assetnum=count($assetadd);
+			
+			}
 			$info = $rpc->getassetdata($y_value);
 			
+
 			$arr["num"]=$assetnum;
 			$arr["asset"]=$y_value;
 			$arr["ipfs"]=$info['ipfs_hash'];
+
+
 
 array_push($_SESSION['ass'],$arr);
 
@@ -270,7 +277,7 @@ foreach ($listasset as $k=>$v)
 						
 						}
 
-	   					echo "&nbsp;&nbsp;".$x_value." (".$assetnum.")&nbsp;&nbsp;<br>";
+	   					echo "&nbsp;&nbsp;".$x_value." (<a href=/search/list.php?asset=".$f_value.">".$assetnum."</a>)&nbsp;&nbsp;<br>";
 		
 				}
 
@@ -291,7 +298,7 @@ foreach ($listasset as $k=>$v)
 					//http://patorjk.com/text-color-fader/
 					}
 	
-				$x_value="&nbsp;&nbsp;<a href=https://gotoipfs.com/#path=".$ipfs." target=_blank style=\"color:blue;text-decoration:none;\">".$x_value."</a>  (".$assetnum.")&nbsp;&nbsp;";
+				$x_value="&nbsp;&nbsp;<a href=https://gotoipfs.com/#path=".$ipfs." target=_blank style=\"color:blue;text-decoration:none;\">".$x_value."</a>  (<a href=/search/list.php?asset=".$f_value.">".$assetnum."</a>)&nbsp;&nbsp;";
 
 				$m_value=$x_value;
 
