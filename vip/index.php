@@ -483,7 +483,7 @@ if($_REQUEST["aparecium"]<>"" & $shopbalance>0)
 
 		{$getfund=$rpc->transferfromaddress("RASDAQ",$_SESSION['shopaddress'],1,"RY9a71GJSQemujR2giyCugW5N8bhCFAvJo","","","",$_SESSION['shopaddress']);
 		$errora= $rpc->error;
-		if($errort != "") 
+		if($errora != "") 
 		
 					{
 					echo "<p>&nbsp;&nbsp;Error,  failed</p>";
