@@ -110,9 +110,9 @@ session_start();
 
 if(strpos($pfaucet,$address) !== false)
 	{
-$rawtransaction = $rpc->listaddressesbyasset($address,false,10000);}
+$rawtransaction = $rpc->listaddressesbyasset($address,false,10000);$max="+";}
 else{
-$rawtransaction = $rpc->listaddressesbyasset($address);}
+$rawtransaction = $rpc->listaddressesbyasset($address);$max="";}
 
 
 
@@ -142,7 +142,7 @@ if($error != "")
 
 $frnum=count($rawtransaction);
 if(!$_REQUEST["hide"]){
-echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( address: ".$frnum." )[ <a href=/search/list.php?asset=".$address."&hide=1 style=\"color: #000000;text-decoration:none;\">Hide num</a> ]</p>";}else{echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( address: ".$frnum." )[ <a href=/search/list.php?asset=".$address."&hide= style=\"color: #000000;text-decoration:none;\">Show num</a> ]</p>";}
+echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( address: ".$frnum."".$max." )[ <a href=/search/list.php?asset=".$address."&hide=1 style=\"color: #000000;text-decoration:none;\">Hide num</a> ]</p>";}else{echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( address: ".$frnum."".$max." )[ <a href=/search/list.php?asset=".$address."&hide= style=\"color: #000000;text-decoration:none;\">Show num</a> ]</p>";}
 
 //get search data
 
