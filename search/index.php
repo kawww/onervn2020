@@ -173,6 +173,7 @@ foreach($age as $x=>$x_value)
 
 			$info = $rpc->getassetdata($x_value);
 			$f_value="";
+			$right=1;
 			$f_value=$x_value;
 			$u_value=$x_value;
 			$u_value=str_replace("/","%2F",$u_value);
@@ -244,6 +245,8 @@ foreach($age as $x=>$x_value)
 						$x_value=$x_value."&nbsp;&nbsp;<a href=https://www.equastart.io target=_blank style=\"color:green;text-decoration:none;\">[ web ]</a>";
 						
 						}
+
+	
 
 	   					echo "&nbsp;&nbsp;".$x_value."&nbsp;&nbsp;<br>";
 		
@@ -337,12 +340,14 @@ foreach($age as $x=>$x_value)
 						}
 			
 					}
-
+	
 	   	echo $x_value."<br>";
 		
 		}
 	}	
 }
+
+	if(!$right){$x_value="nothing, you can create and own forever.";echo "&nbsp;&nbsp;".$x_value."&nbsp;&nbsp;<br>";}
 
 echo "<br>&nbsp;&nbsp;<a href=http://onervn.com/search?asset=".$address." style=\"color: #000000;text-decoration:none;\">http://onervn.com/search?asset=".$address."</a>&nbsp;<br>";
 
