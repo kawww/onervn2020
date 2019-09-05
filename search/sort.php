@@ -214,7 +214,7 @@ foreach ($listasset as $k=>$v)
 			$f_value=$x_value;
 			$u_value=$x_value;
 			$u_value=str_replace("/","%2F",$u_value);
-
+			$u_value=str_replace("#","%23",$u_value);
 			if(!$ipfs)
 
 				{
@@ -277,7 +277,7 @@ foreach ($listasset as $k=>$v)
 						
 						}
 
-	   					echo "&nbsp;&nbsp;".$x_value." (<a href=/search/list.php?asset=".$f_value.">".$assetnum."</a>)&nbsp;&nbsp;<br>";
+	   					echo "&nbsp;&nbsp;".$x_value." (<a href=/search/list.php?asset=".$u_value.">".$assetnum."</a>)&nbsp;&nbsp;<br>";
 		
 				}
 
@@ -298,7 +298,7 @@ foreach ($listasset as $k=>$v)
 					//http://patorjk.com/text-color-fader/
 					}
 	
-				$x_value="&nbsp;&nbsp;<a href=https://gotoipfs.com/#path=".$ipfs." target=_blank style=\"color:blue;text-decoration:none;\">".$x_value."</a>  (<a href=/search/list.php?asset=".$f_value.">".$assetnum."</a>)&nbsp;&nbsp;";
+				$x_value="&nbsp;&nbsp;<a href=https://gotoipfs.com/#path=".$ipfs." target=_blank style=\"color:blue;text-decoration:none;\">".$x_value."</a>  (<a href=/search/list.php?asset=".$u_value.">".$assetnum."</a>)&nbsp;&nbsp;";
 
 				$m_value=$x_value;
 
