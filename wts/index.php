@@ -248,7 +248,7 @@ else
 		
 		if($one[$i]==$buyasset)
 			
-		{$buytotal=$buynum*$count;
+		{$buytotal=intval($buynum*$count);
 			echo $buytotal;
 			$stock=$shopbalance;
 			
