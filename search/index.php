@@ -80,7 +80,24 @@ session_start();
 
 //rpc
 
-$address=trim(strtoupper($_REQUEST["asset"]));
+$asset=trim($_REQUEST["asset"]);
+
+	if(strpos($asset,"#") !== false or strpos($asset,"deid@") !== false or strpos($asset,"DEID@") !== false){
+
+	
+
+	$asset=str_replace("deid@","DEID#",$asset);
+	$asset=str_replace("DEID@","DEID#",$asset);
+
+	list($assa,$assb)=explode("#",$asset);
+
+	$assa=strtoupper($assa);
+	$asset=$assa."#".$assb;
+	
+	}else{
+$asset=strtoupper($asset);}
+
+$address=$asset;
 
 //check address
 
