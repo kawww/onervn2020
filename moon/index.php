@@ -80,8 +80,8 @@ if(!$add & !$_SESSION['raddress'])
 	<form action=\"/moon/\" method=\"post\">
 	<h2>Your Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
-	</form><br>You can get MOONCAKE at <a href=/bonus>bonus</a>, <a href=/rasdaq>rasdaq</a>, <a href=/ex>ex</a>, <a href=/search?asset=MOON>search</a>, <a href=/faucet/?asset=MOONCAKE>faucet</a>, <a href=http://ravenx.net/sales/MOONCAKE>ravenx</a>.<br><br>You can sell your MOONCAKE at  <a href=/wts>wts</a>, <a href=http://ravenx.net/sales/MOONCAKE>ravenx</a>.";
-
+	</form><br>You can get MOONCAKE at <a href=/bonus>bonus</a>, <a href=/rasdaq>rasdaq</a>, <a href=/ex>ex</a>, <a href=/search?asset=MOON>search</a>, <a href=/faucet/?asset=MOONCAKE>faucet</a>, <a href=http://ravenx.net/sales/MOONCAKE>ravenx</a>.<br><br>You can sell your MOONCAKE at  <a href=/wts>wts</a>, <a href=http://ravenx.net/sales/MOONCAKE>ravenx</a>.<br><br>";
+	include("../news.txt");
 	include("../foot.php");
 	echo "</center>";
 

@@ -83,8 +83,8 @@ if((!$add & !$_SESSION['raddress']) or (!$ass & !$_SESSION['asset']))
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To Asset: <input type=\"text\" name=\"asset\">
 	<br>
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
-	</form><br>Service fee 1 rvn, each address 0.1rvn.<br>recommand download php code and run this in your local network, no fee.<br>don't use any address with rvn or asset to login,<br>generate a new address not on the explorer.";
-
+	</form><br>Service fee 1 rvn, each address 0.1rvn.<br>Recommand run php code or bat in your local network.<br><br>";
+	include("../news.txt");
 	include("../foot.php");
 	echo "</center>";
 

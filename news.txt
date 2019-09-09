@@ -1,0 +1,3 @@
+﻿
+Your address is your password.<br>Recommand generate a new address to login. <br><br>
+If address have rvn or asset, <br>everyone can see the address on chain and login.

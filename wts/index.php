@@ -84,7 +84,7 @@ if(!$add & !$_SESSION['raddress'])
 	<h2>Your Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
 	</form><br>";
-
+	include("../news.txt");
 	include("../foot.php");
 	echo "</center>";
 

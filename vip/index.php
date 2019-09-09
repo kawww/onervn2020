@@ -83,7 +83,7 @@ if(!$add & !$_SESSION['raddress'])
 	<h2>Your Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
 	</form><p><h3>Rare Asset Outlet, Member VIP Only</h3> Search <a href=http://onervn.com/search?asset=RASDAQ>rasdaq</a> to get free Member asset.&nbsp;<br>Buy [RASDAQ/VIP] asset to get Discount.<br><br>[RASDAQ/VIP] selling on <a href=/rasdaq>rasdaq</a> <a href=http://ravenx.net/sales/RASDAQ>ravenx</a>.</p>";
-
+	include("../news.txt");
 	include("../foot.php");
 	echo "</center>";
 

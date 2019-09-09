@@ -80,7 +80,7 @@ if(!$add & !$_SESSION['raddress'])
 	<h2>Your Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
 	</form><br><h3>RAVEN INSIDE is the page support RAVENCOIN and ASSETS airdrop.<br>Input your rvn address, and random get bonus in the raven world.</h3>";
-
+	include("../news.txt");
 	include("../foot.php");
 	echo "</center>";
 

@@ -81,8 +81,8 @@ if(!$add & !$_SESSION['raddress'])
 	<form action=\"/rasdaq/\" method=\"post\">
 	<h2>Your Address: <input type=\"text\" name=\"address\">
 	<br><br><input type=\"submit\" value=\"KAW\"></h2>
-	</form><br><h3><a href=/vip>Get Member Vip Discount</a></h3>";
-
+	</form><h3><a href=/vip>Get Member Vip Discount</a></h3>";
+	include("../news.txt");
 	include("../foot.php");
 	echo "</center>";
 
