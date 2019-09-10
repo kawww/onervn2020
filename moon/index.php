@@ -131,7 +131,28 @@ else
 	$rpc = new Linda();
 
 
+//check asset
 
+$getviplist = $rpc->listassetbalancesbyaddress($address);
+
+	$error = $rpc->error;
+
+	if($error != "") 
+		
+		{
+		echo "<p>&nbsp;&nbsp;Error,R</p>";
+		exit;
+		}
+
+	if(count($getviplist) <>0) 
+		
+		{
+		echo "<h2>&nbsp;Your address have ".count($getviplist)." asset.<br><br>&nbsp;For your account safe, please generate a new address to login. <br><br>&nbsp;<a href=http://onervn.com/qr/?address=".$address.">".$address."</a><br><form action=\"/moon/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;<input type=\"submit\" value=\"logout\"></form>";
+							
+							include("../foot.txt");
+							exit;
+	
+		}
 
 
 	if(!$_SESSION['shopaddress'])
