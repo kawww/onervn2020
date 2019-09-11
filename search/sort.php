@@ -294,7 +294,7 @@ foreach ($listasset as $k=>$v)
 						
 						}
 
-	   					echo "&nbsp;&nbsp;".$x_value." (<a href=/search/list.php?asset=".$u_value.">".$assetnum."</a>)&nbsp;&nbsp;<br>";
+	   					echo "&nbsp;&nbsp;".$x_value." (<a href=/list?asset=".$u_value.">".$assetnum."</a>)&nbsp;&nbsp;<br>";
 		
 				}
 
@@ -315,7 +315,7 @@ foreach ($listasset as $k=>$v)
 					//http://patorjk.com/text-color-fader/
 					}
 	
-				$x_value="&nbsp;&nbsp;<a href=https://gotoipfs.com/#path=".$ipfs." target=_blank style=\"color:blue;text-decoration:none;\">".$x_value."</a>  (<a href=/search/list.php?asset=".$u_value.">".$assetnum."</a>)&nbsp;&nbsp;";
+				$x_value="&nbsp;&nbsp;<a href=https://gotoipfs.com/#path=".$ipfs." target=_blank style=\"color:blue;text-decoration:none;\">".$x_value."</a>  (<a href=/list?asset=".$u_value.">".$assetnum."</a>)&nbsp;&nbsp;";
 
 				$m_value=$x_value;
 
