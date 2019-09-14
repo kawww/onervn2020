@@ -70,7 +70,7 @@ if($_REQUEST["change"]<>"")
 	{$add="";
 $_SESSION = array();}
 
-if(!$add & !$_SESSION['raddress'])
+if(!$add & !$_SESSION['baddress'])
 	
 	{
 
@@ -101,7 +101,7 @@ else
 	//check address
 
 	if(!$address){
-	$address=$_SESSION['raddress'];
+	$address=$_SESSION['baddress'];
 				}
 
 
@@ -119,29 +119,31 @@ else
 
 		else
 				{
-	$_SESSION['raddress']=$address;
+	$_SESSION['baddress']=$address;
 				}
 
 	//generate address
 
 
 $cap=$rpc->listmyassets("NUKA/COLA/CAP");
-$cake=$rpc->listmyassets("MOONCAKE");
+//$cake=$rpc->listmyassets("MOONCAKE");
 
 
-$gasset=$rpc->listassetbalancesbyaddress($_SESSION['raddress']);
+$gasset=$rpc->listassetbalancesbyaddress($_SESSION['baddress']);
 
 $gcap=$gasset["NUKA/COLA/CAP"];
-$gcake=$gasset["MOONCAKE"];
+//$gcake=$gasset["MOONCAKE"];
 
 if(!$gcap){$gcap=0;}
-if(!$gcake){$gcake=0;}
+//if(!$gcake){$gcake=0;}
 
 	echo "<center><H1>RAVEN INSIDE</H1>onervn.com/bonus<br><img src=/img/inside.jpg><br><br>";
 	
-	echo "<h2>bonus cap: ".$cap['NUKA/COLA/CAP']."<br>mooncake: ".$cake['MOONCAKE']."<br><br>Your Address: ".$_SESSION['raddress']."<br><br>You have ".$gcap." cap and ".$gcake." mooncake</h2>";
+	echo "<h2>bonus cap: ".$cap['NUKA/COLA/CAP']."<br><br>Your Address: ".$_SESSION['baddress']."<br><br>You have ".$gcap." cap</h2>";
+
+	//echo "<h2>bonus cap: ".$cap['NUKA/COLA/CAP']."<br>mooncake: ".$cake['MOONCAKE']."<br><br>Your Address: ".$_SESSION['baddress']."<br><br>You have ".$gcap." cap and ".$gcake." mooncake</h2>";
 	
-	echo "<input type=button value=\"pick up a cap\" onclick=\"location.reload()\"> <br>".$_SESSION['getcap']."<h3>You will find <font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ffff\">s</font> at the bottom of the raven inside page.<br>Share your link to get more caps</h3><br>http://onervn.com/bonus/?address=".$_SESSION['raddress']."";
+	echo "<input type=button value=\"pick up a cap\" onclick=\"location.reload()\"> <br>".$_SESSION['getcap']."<h3>You will find <font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ffff\">s</font> at the bottom of the raven inside page.<br>Share your link to get more caps</h3><br>http://onervn.com/bonus/?address=".$_SESSION['baddress']."";
 
 				echo "<form action=\"/bonus/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";
 

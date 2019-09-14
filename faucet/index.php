@@ -104,7 +104,7 @@ if($asset=="" or $address=="" )
 
 
 		echo "<H2>ASSET : ".$ax."</H2><br><form action=\"index.php\" method=\"post\"><h2>Address: <input type=\"text\" name=\"address\">
-		<input type=\"hidden\" name=\"asset\" value=".$ax."><input type=\"hidden\" name=\"originator\" value=\"".$code."\"><br><br><input type=\"submit\" value=\"GET ONE\"></h2></form><br>";
+		<input type=\"hidden\" name=\"asset\" value=".$ax."><input type=\"hidden\" name=\"originator\" value=\"".$code."\"><br><br><input type=\"submit\" value=\"GET ONE\"></h2></form><br><br>&nbsp;&nbsp;<img src=https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://onervn.com/faucet/?asset=".$asset.">";
 
 		}
 
