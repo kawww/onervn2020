@@ -70,17 +70,89 @@ session_start();
 		<br>&nbsp;&nbsp;
 		<a href="/" style="color: #000000;text-decoration:none;"><b>RAVENCOIN ASSET SEARCH</b></a>
 		<br><br>&nbsp;&nbsp;
-		<input type="text" name="asset">
+		<input type="text" name="asset" maxlength="31">
 		<input type="submit" value="KAW">
 		</form>
 
 
 <?php
 
+//utf
+
+function check_utf8($str)
+  {
+      $len = strlen($str);
+      for($i = 0; $i < $len; $i++){
+          $c = ord($str[$i]);
+          if ($c > 128) {
+              if (($c > 247)) return false;
+              elseif ($c > 239) $bytes = 4;
+              elseif ($c > 223) $bytes = 3;
+              elseif ($c > 191) $bytes = 2;
+              else return false;
+              if (($i + $bytes) > $len) return false;
+              while ($bytes > 1) {
+                  $i++;
+                  $b = ord($str[$i]);
+                  if ($b < 128 || $b > 191) return false;
+                  $bytes--;
+              }
+          }
+      }
+      return true;
+  } // end of 
+
+
+function utf8_to_unicode( $str ) {
+
+    $unicode = array();        
+    $values = array();
+    $lookingFor = 1;
+
+    for ($i = 0; $i < strlen( $str ); $i++ ) {
+        $thisValue = ord( $str[ $i ] );
+    if ( $thisValue < ord('A') ) {
+        // exclude 0-9
+        if ($thisValue >= ord('0') && $thisValue <= ord('9')) {
+             // number
+             $unicode[] = chr($thisValue);
+        }
+        else {
+             $unicode[] = '%'.dechex($thisValue);
+        }
+    } else {
+          if ( $thisValue < 128) 
+        $unicode[] = $str[ $i ];
+          else {
+                if ( count( $values ) == 0 ) $lookingFor = ( $thisValue < 224 ) ? 2 : 3;                
+                $values[] = $thisValue;                
+                if ( count( $values ) == $lookingFor ) {
+                    $number = ( $lookingFor == 3 ) ?
+                        ( ( $values[0] % 16 ) * 4096 ) + ( ( $values[1] % 64 ) * 64 ) + ( $values[2] % 64 ):
+                        ( ( $values[0] % 32 ) * 64 ) + ( $values[1] % 64 );
+            $number = dechex($number);
+            $unicode[] = (strlen($number)==3)?"0".$number:"".$number;
+                    $values = array();
+                    $lookingFor = 1;
+          } // if
+        } // if
+    }
+    } // for
+    return implode("",$unicode);
+
+} // utf8_to_unicod
+
 
 //rpc
 
 $asset=trim($_REQUEST["asset"]);
+
+
+
+if(check_utf8($asset)==true && !preg_match('/[A-Za-z]/', $asset) && !preg_match('/[0-9]/', $asset)){
+
+	$asset=utf8_to_unicode($asset); $unicode="<br>&nbsp;&nbsp;Unicode: ".trim($_REQUEST["asset"])."<br>";}
+
 
 	if(strpos($asset,"#") !== false or strpos($asset,"deid@") !== false or strpos($asset,"DEID@") !== false){
 
@@ -173,7 +245,7 @@ $fnum=substr_count($faucet,$address);
 $rnum=substr_count($rfaucet,$address);
 $xnum=substr_count($xfaucet,$address);
 $frnum=$fnum+$rnum;
-echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( faucet:".$frnum.", sale:".$xnum." ) [ <a href=/search/sort.php?asset=".$address." style=\"color: #000000;text-decoration:none;\">Sort</a> ]<br>&nbsp;&nbsp;[ <a href=\"/word\" style=\"color: #000000;text-decoration:none;\">Generate ".$address." universe</a> ]</p>";
+echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( faucet:".$frnum.", sale:".$xnum." ) [ <a href=/search/sort.php?asset=".$address." style=\"color: #000000;text-decoration:none;\">Sort</a> ]".$unicode."&nbsp;&nbsp;[ <a href=\"/word\" style=\"color: #000000;text-decoration:none;\">Generate ".$address." universe</a> ]</p>";
 
 //get search data
 
@@ -188,7 +260,43 @@ foreach($age as $x=>$x_value)
 
 			{
 
-			$info = $rpc->getassetdata($x_value);
+
+$info = $rpc->getassetdata($x_value);
+
+if($unicode!="")
+
+{
+
+$assetsplit=str_split($asset,4);
+
+foreach($assetsplit as $assety)
+	{
+$assetx="U+".$assety."";
+$utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
+
+$x_value=str_replace($assety,$utf8string,$x_value);
+
+	}
+
+}else
+
+				{$x_value=str_replace("U.","U+",$x_value);
+				
+				$x_value = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $x_value), ENT_NOQUOTES, 'UTF-8');
+
+				$x_value=str_replace("U+","U.",$x_value);
+				}
+
+
+//if(stripos($x_value,"/")!=false)
+					//{}else{$sp = array(); 			$spdo=str_split($sp,4)}
+
+
+
+				
+
+
+			
 			$f_value="";
 			$right=1;
 			$f_value=$x_value;
@@ -263,7 +371,7 @@ foreach($age as $x=>$x_value)
 						
 						}
 
-	
+
 
 	   					echo "&nbsp;&nbsp;".$x_value."&nbsp;&nbsp;<br>";
 		

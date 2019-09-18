@@ -44,6 +44,40 @@
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/main.css">
         <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+
+		<style>
+div,ul,li{margin: 0;padding: 0}
+.notice {
+ width: 80px;
+ height: 35px;
+ padding: 0 30px;
+ background-color: #b3effe;
+ overflow: hidden;
+}
+.notice ul li {
+ list-style: none;
+ line-height: 35px;
+
+ display: block;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+ overflow: hidden;
+}
+
+</style>
+
+<script>
+
+function noticeUp(obj,top,time) {
+ $(obj).animate({
+ marginTop: top
+ }, time, function () {
+ $(this).css({marginTop:"0"}).find(":first").appendTo(this);
+ })
+}
+
+ setInterval("noticeUp('.notice ul','-35px',500)", 2000);
+</script>
     </head>
     <body>
 
@@ -57,11 +91,23 @@
 
 		onervn.com<br>
 		
-		<img src=/img/chead.jpg><br><br>
+		<img src=/img/chead.jpg><div class="notice">
+ <ul>
+ <li><a href=/search?asset=HELLO>Hello</a></li>
+ <li><a href=/search/?asset=%E4%BD%A0%E5%A5%BD>你好</a></li>
+ <li><a href=/search?asset=안녕하세>안녕하세요</a></li>
+ <li><a href=/search?asset=こんにち>こんにちは</a></li>
+ <li><a href=/search?asset=Прив>Привет</a></li>
+ <li><a href=/search?asset=สวัส>สวัสดี</a></li>
+ <li><a href=/search?asset=हैलो>हैलो</a></li>
+ </ul>
+</div>
+
+<br><a href=/search/?asset=%E2%9D%A4 style="color: #000000;text-decoration:none;">❤</a><br>
 
 		<form action="search/" method="post">
 		<h3>
-		Asset: <input type="text" name="asset" style="width:100px;">
+		Asset: <input type="text" name="asset" style="width:100px;" maxlength="31">
 		<input type="submit" value="KAW">
 		</h3>
 		</form><br>
@@ -89,7 +135,8 @@
 		
 		<br><br>
 		<a href="/word" style="color: #000000;text-decoration:none;">universe</a>&nbsp;&nbsp|&nbsp;&nbsp;<a href="/bonus" style="text-decoration:none;"><font color=\"#ff0000\">b</font><font color=\"#ff7f00\">o</font><font color=\"#ff7f00\">n</font><font color=\"#00ff00\">u</font><font color=\"#00ff00\">s</font></a>&nbsp;&nbsp;|&nbsp;&nbsp<a href="/divided" style="color: #000000;text-decoration:none;">divided</a>
-		
+				<br><br>
+		&nbsp;&nbsp;<a href="/rkey" style="color: #000000;text-decoration:none;"><b>R key</b></a> 
 		<br><br>
 		&nbsp;&nbsp;<a href="http://onervn.com/search?asset=ONERVN" style="color: #000000;text-decoration:none;"><b>sitemap</b></a> 
 
