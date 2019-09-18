@@ -145,13 +145,75 @@ function utf8_to_unicode( $str ) {
 
 //rpc
 
-$asset=trim($_REQUEST["asset"]);
+$asset=strtoupper(trim($_REQUEST["asset"]));
+$turn=trim($_REQUEST["unicode"]);
+$ux=trim($_REQUEST["u"]);
+
+//all to unicode
 
 
+
+if(trim($_REQUEST["unicode"])==2 & $ux==1)
+	
+{
+
+
+
+	$unicode="<br>&nbsp;&nbsp;Unicode: ".$asset;
+
+	$assetm=$asset;
+	
+	$assetsplit=str_split($asset,4);
+
+	foreach($assetsplit as $assety)
+	{
+	$assetx="U+".$assety."";
+	$utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
+
+	$asset=str_replace($assety,$utf8string,$asset);
+	
+	}
+
+
+
+	
+}
 
 if(check_utf8($asset)==true && !preg_match('/[A-Za-z]/', $asset) && !preg_match('/[0-9]/', $asset)){
 
-	$asset=utf8_to_unicode($asset); $unicode="<br>&nbsp;&nbsp;Unicode: ".trim($_REQUEST["asset"])."<br>";}
+	$asset=utf8_to_unicode($asset); 
+	$unicode="<br>&nbsp;&nbsp;<font color=green>Unicode</font>: ".trim($_REQUEST["asset"]);
+	$unioff=" <a href=/search?asset=".$asset."&unicode=0&u=1 style=\"color: #000000;text-decoration:none;\">[ TURN-OFF ]</a><br>";
+	
+	$turn=1;
+	
+	
+	}else{
+
+		$unioff="<br>&nbsp;&nbsp;<font color=red>Unicode</font> <a href=/search?asset=".$asset."&unicode=1 style=\"color: #000000;text-decoration:none;\">[ TURN-ON ]</a><br>";
+
+		if($ux==1){
+
+			$unioff="<br>&nbsp;&nbsp;<font color=red>Unicode</font> <a href=/search?asset=".$asset."&unicode=2&u=1 style=\"color: #000000;text-decoration:none;\">[ TURN-ON ]</a><br>";}
+
+			
+		
+		
+			}
+
+
+
+if(trim($_REQUEST["unicode"])==1 & !$ux)
+	
+{
+
+
+
+$unicode="<br>&nbsp;&nbsp;<font color=green>Unicode</font>: ".$asset;
+$unioff=" <a href=/search?asset=".$asset."&unicode=0 style=\"color: #000000;text-decoration:none;\">[ TURN-OFF ]</a><br>";
+	
+	
+}
 
 
 	if(strpos($asset,"#") !== false or strpos($asset,"deid@") !== false or strpos($asset,"DEID@") !== false){
@@ -181,6 +243,8 @@ if(!$address)
 	$rnd=rand(1,$line);
 	$address=strtoupper(getLine("asset.txt",$rnd));
 	$address=preg_replace("/\s/","",$address);
+
+	$turn=0;
 
 	}
 
@@ -245,7 +309,10 @@ $fnum=substr_count($faucet,$address);
 $rnum=substr_count($rfaucet,$address);
 $xnum=substr_count($xfaucet,$address);
 $frnum=$fnum+$rnum;
-echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( faucet:".$frnum.", sale:".$xnum." ) [ <a href=/search/sort.php?asset=".$address." style=\"color: #000000;text-decoration:none;\">Sort</a> ]".$unicode."&nbsp;&nbsp;[ <a href=\"/word\" style=\"color: #000000;text-decoration:none;\">Generate ".$address." universe</a> ]</p>";
+
+
+
+echo "<p>&nbsp;&nbsp;<font color=red>".$address."</font>&nbsp;( faucet:".$frnum.", sale:".$xnum." ) [ <a href=/search/sort.php?asset=".$address." style=\"color: #000000;text-decoration:none;\">Sort</a> ]".$unicode."".$unioff."&nbsp;&nbsp;[ <a href=\"/word\" style=\"color: #000000;text-decoration:none;\">Generate ".$address." universe</a> ]</p>";
 
 //get search data
 
@@ -263,10 +330,35 @@ foreach($age as $x=>$x_value)
 
 $info = $rpc->getassetdata($x_value);
 
+//turn off
+
+if($turn==1){
+
+
+
+
+
+
+
+
+
 if($unicode!="")
 
 {
 
+
+
+
+$x_value=str_replace("U.","U+",$x_value);
+				
+				$x_value = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $x_value), ENT_NOQUOTES, 'UTF-8');
+
+				$x_value=str_replace("U+","U.",$x_value);
+				
+
+
+
+if(strlen($x_value)==strlen($address)){
 $assetsplit=str_split($asset,4);
 
 foreach($assetsplit as $assety)
@@ -274,25 +366,161 @@ foreach($assetsplit as $assety)
 $assetx="U+".$assety."";
 $utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
 
+$x_value=str_replace($assety,$utf8string,$x_value);}
+}
+else
+	{
+if(!preg_match ( '/[\Q~!@#$%^&*()+-_=.:?<>\E]/', $x_value ))
+					{
+	
+	$assetsplit=str_split($x_value,4);
+
+foreach($assetsplit as $assety)
+	
+{
+$assetx="U+".$assety."";
+$utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
+
 $x_value=str_replace($assety,$utf8string,$x_value);
+	
 
+		}
 	}
+	else{
+			
+			//sub asset
 
-}else
+		if(preg_match ( "'/'", $x_value) & !preg_match ( '/[\Q~!@#$%^&*()+-_=.:?<>\E]/')){
 
-				{$x_value=str_replace("U.","U+",$x_value);
-				
-				$x_value = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $x_value), ENT_NOQUOTES, 'UTF-8');
+			list($aleft,$aright)=explode("/",$x_value);
 
-				$x_value=str_replace("U+","U.",$x_value);
-				}
+			if (!(strlen($aright) % 4) && strlen($aright)){
+
+						$assetsplit=str_split($aright,4);
+
+						foreach($assetsplit as $assety)
+	
+															{
+							$assetx="U+".$assety."";
+							$utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
+
+								$x_value=str_replace($assety,$utf8string,$x_value);
+
+															}	
+														}
+
+				if (!(strlen($aleft) % 4) && strlen($aleft)){
+
+						$assetsplit=str_split($aleft,4);
+
+						foreach($assetsplit as $assety)
+	
+															{
+							$assetx="U+".$assety."";
+							$utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
+
+								$x_value=str_replace($assety,$utf8string,$x_value);
+
+															}	
+														}
 
 
-//if(stripos($x_value,"/")!=false)
-					//{}else{$sp = array(); 			$spdo=str_split($sp,4)}
+		}
+
+		//#asset
+
+		if(preg_match ( "'#'", $x_value) & !preg_match ( '/[\Q~!@$%^&*()+-_=.:?<>\E]/')){
+
+			list($aleft,$aright)=explode("#",$x_value);
+
+			if (!(strlen($aright) % 4) && strlen($aright)){
+
+						$assetsplit=str_split($aright,4);
+
+						foreach($assetsplit as $assety)
+	
+															{
+							$assetx="U+".$assety."";
+							$utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
+
+								$x_value=str_replace($assety,$utf8string,$x_value);
+
+															}	
+														}
+
+				if (!(strlen($aleft) % 4) && strlen($aleft)){
+
+						$assetsplit=str_split($aleft,4);
+
+						foreach($assetsplit as $assety)
+	
+															{
+							$assetx="U+".$assety."";
+							$utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
+
+								$x_value=str_replace($assety,$utf8string,$x_value);
+
+															}	
+														}
+
+
+		}
+
+
+		//ID_and Lang
+
+		
+
+		if(preg_match ( "'_'", $x_value) & !preg_match ( '/[\Q~!@$%^&*()+-=.:?<>\E]/')){
+
+			list($aleft,$aright)=explode("_",$x_value);
+
+			if (!(strlen($aright) % 4) && strlen($aright)){
+
+						$assetsplit=str_split($aright,4);
+
+						foreach($assetsplit as $assety)
+	
+															{
+							$assetx="U+".$assety."";
+							$utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
+
+								$x_value=str_replace($assety,$utf8string,$x_value);
+
+															}	
+														}
 
 
 
+		}
+
+
+								//else
+if (!(strlen($asset) % 4) && strlen($asset)){
+							$assetsplit=str_split($asset,4);
+
+							foreach($assetsplit as $assety)
+								{
+								$assetx="U+".$assety."";
+								$utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
+
+								$x_value=str_replace($assety,$utf8string,$x_value);
+								}}
+	}
+ }
+}
+
+
+}
+
+
+
+			
+
+
+
+
+$x_value=str_replace("U+","",$x_value);
 				
 
 
