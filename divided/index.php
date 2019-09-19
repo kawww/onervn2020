@@ -102,6 +102,23 @@ else
 
 	$address=trim($_REQUEST["address"]);
 	$asset=trim($_REQUEST["asset"]);
+	
+
+	if(check_utf8($asset)==true && !preg_match('/[A-Za-z]/', $asset) && !preg_match('/[0-9]/', $asset))
+		
+	{
+
+	if(!$_SESSION['unique']){$_SESSION['unique']=$asset;}
+
+	$asset=utf8_to_unicode($asset); 
+	$unicode=" ( <font color=green>".$_SESSION['unique']."</font> )";
+
+	
+	
+	
+	
+	}
+
 
 	if(strpos($asset,"#") !== false or strpos($asset,"deid@") !== false or strpos($asset,"DEID@") !== false){
 
@@ -307,14 +324,14 @@ else{
 	$addnum=count($shoplist);
 
 
-echo "<br>&nbsp;&nbsp;You can send rvn/asset.<br>&nbsp;&nbsp;All rvn and asset will send to ".$asset." HODLERS<br><br>&nbsp;&nbsp;<a href=http://onervn.com/qr?address=".$_SESSION['raddress'].">".$_SESSION['raddress']." </a> ";
+echo "<br>&nbsp;&nbsp;You can send rvn/asset.<br>&nbsp;&nbsp;All rvn and asset will send to <font color=red>".$asset."</font> ".$unicode." HODLERS<br><br>&nbsp;&nbsp;<a href=http://onervn.com/qr?address=".$_SESSION['raddress'].">".$_SESSION['raddress']." </a> ";
 
 	
 $sendassetnum=$_REQUEST["snum"];
 $sendassetfee=round(0.1*$addnum,1);
 
 
-echo "<p>&nbsp;&nbsp;".$asset." HODLERS: ".$addnum."  Fee: ".$sendassetfee." </p>";
+echo "<p>&nbsp;&nbsp;".$asset." ".$unicode." HODLERS: ".$addnum."  Fee: ".$sendassetfee." </p>";
 
 
 
