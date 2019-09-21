@@ -133,8 +133,8 @@ else
 			if(stristr($x,$asset) == true){
 
 				echo "&nbsp;&nbsp;".$x."&nbsp;&nbsp;[ <a href=/qr?address=".$address."&asset=".$x.">".$x_value."</a> ]";
-
-				echo "<br><br>&nbsp;&nbsp;http://onervn.com/qr?asset=".$x."&nbsp;<br><br>";
+				$u_value=str_replace("/","%2F",$x);
+				echo "<br><br>&nbsp;&nbsp;http://onervn.com/qr?asset=".$u_value."&nbsp;<br><br>";
 				exit;
 			}
 
