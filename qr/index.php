@@ -64,7 +64,7 @@ if(!$_REQUEST["address"])
 	onervn.com/qr<br><img src=/img/rhead.jpg><br><br>
 	<form action=\"/qr/\" method=\"post\">
 	<h2>Address: <input type=\"text\" name=\"address\">
-	<br><br><input type=\"submit\" value=\"KAW\"></h2>
+	<br><br><input type=\"submit\" value=\"KAW\"></h2><input type=\"hidden\" name=\"asset\" value=\"".strtoupper(trim($_REQUEST["asset"]))."\">
 	</form><br><h4><a href=\"http://onervn.com/qr?address=RTyyjWdBWb8JZx1dKeXRHXsPcPBSz82WhJ\" >RTyyjWdBWb8JZx1dKeXRHXsPcPBSz82WhJ</a></h4>";
 
 	include("../foot.php");
@@ -78,7 +78,7 @@ else
 	{
 
 	echo "<form action=\"/qr/\" method=\"post\">
-	<br>&nbsp;&nbsp;<a href=\"/qr/\" style=\"color: #000000;text-decoration:none;\"><b>RAVENCOIN ASSET QR</b></a><br><br>&nbsp;&nbsp;<input type=\"text\" name=\"address\">
+	<br>&nbsp;&nbsp;<a href=\"/qr/\" style=\"color: #000000;text-decoration:none;\"><b>RAVENCOIN ASSET QR</b></a><br><br>&nbsp;&nbsp;<input type=\"text\" name=\"address\"><input type=\"hidden\" name=\"asset\" value=\"".strtoupper(trim($_REQUEST["asset"]))."\">
 	<input type=\"submit\" value=\"KAW\"></form>";
 
 	//rpc
@@ -123,11 +123,24 @@ else
 	//list address
 
 	$age=$rawtransaction;
+
+	$asset=strtoupper(trim($_REQUEST["asset"]));
  
 	foreach($age as $x=>$x_value)
 
 			{
 
+			if(stristr($x,$asset) == true){
+
+				echo "&nbsp;&nbsp;".$x."&nbsp;&nbsp;[ <a href=/qr?address=".$address."&asset=".$x.">".$x_value."</a> ]";
+
+				echo "<br><br>&nbsp;&nbsp;http://onervn.com/qr?asset=".$x."&nbsp;<br><br>";
+				exit;
+			}
+
+			if(!$asset)
+
+				{
             //special asset example
 
 			if($x=="DONATIONS_ACCEPTED" or $x=="TERA")
@@ -157,11 +170,11 @@ else
 
 			{
 
-			echo "&nbsp;&nbsp;".$x."&nbsp;&nbsp;[ ".$x_value." ]";
+			echo "&nbsp;&nbsp;".$x."&nbsp;&nbsp;[ <a href=/qr?address=".$address."&asset=".$x.">".$x_value."</a> ]";
  
-			}
-
-		echo "<br><br>";
+			}echo "<br><br>";
+				}
+		
 	}
 
 //show qr
