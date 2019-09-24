@@ -292,22 +292,28 @@ $x_value=str_replace("U.","U+",$x_value);
 
 				$x_value=str_replace("U+","U.",$x_value);
 				
+//asset same
 
 
+if(strlen($x_value)==strlen($address) ){
 
-if(strlen($x_value)==strlen($address)){
 $assetsplit=str_split($asset,4);
 
 foreach($assetsplit as $assety)
 	{
+
 $assetx="U+".$assety."";
+
 $utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $assetx), ENT_NOQUOTES, 'UTF-8');
 
 $x_value=str_replace($assety,$utf8string,$x_value);}
 }
 else
 	{
-if(!preg_match ( '/[\Q~!@#$%^&*()+-_=.:?<>\E]/', $x_value ))
+
+
+
+if(preg_match ('/^[-a-zA-Z0-9 .]+$/', $x_value ))
 					{
 	
 	$assetsplit=str_split($x_value,4);
@@ -327,7 +333,7 @@ $x_value=str_replace($assety,$utf8string,$x_value);
 			
 			//sub asset
 
-		if(preg_match ( "'/'", $x_value) & !preg_match ( '/[\Q~!@#$%^&*()+-_=.:?<>\E]/')){
+		if(preg_match ( "'/'", $x_value)){
 
 			list($aleft,$aright)=explode("/",$x_value);
 
