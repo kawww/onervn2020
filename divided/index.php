@@ -324,6 +324,9 @@ else{
 	$addnum=count($shoplist);
 
 
+//if(strlen($unicode)==30){$unicode="";}
+
+
 echo "<br>&nbsp;&nbsp;You can send rvn/asset.<br>&nbsp;&nbsp;All rvn and asset will send to <font color=red>".$asset."</font> ".$unicode." HODLERS<br><br>&nbsp;&nbsp;<a href=http://onervn.com/qr?address=".$_SESSION['raddress'].">".$_SESSION['raddress']." </a> ";
 
 	
@@ -336,7 +339,7 @@ $sendassetfee=round(0.1*$addnum,1);
 echo "<p>&nbsp;&nbsp;".$asset." ".$unicode." HODLERS: ".$addnum."  Fee: ".$sendassetfee." </p>";
 
 
-if($sendassetnum==$addnum){echo "not support send all asset to one address";exit;} 
+if($sendassetnum==$addnum){echo "not support send all asset to one address";	echo "<form action=\"/divided/\" method=\"post\"><input type=\"hidden\" name=\"change\" value=\"logout\"><br>&nbsp;&nbsp;<input type=\"submit\" value=\"logout\"></form>";exit;} 
 
 
 if($_REQUEST["go"]<>""){
