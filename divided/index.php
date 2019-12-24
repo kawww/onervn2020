@@ -331,8 +331,12 @@ $sendassetnum=$_REQUEST["snum"];
 $sendassetfee=round(0.1*$addnum,1);
 
 
+
+
 echo "<p>&nbsp;&nbsp;".$asset." ".$unicode." HODLERS: ".$addnum."  Fee: ".$sendassetfee." </p>";
 
+
+if($sendassetnum==$addnum){echo "not support send all asset to one address";exit;} 
 
 
 if($_REQUEST["go"]<>""){
